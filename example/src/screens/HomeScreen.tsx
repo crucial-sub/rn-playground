@@ -13,6 +13,12 @@ const HomeScreen = () => {
     });
   };
 
+  const onPressSectionListButton = () => {
+    navigation.navigate('MainStack', {
+      screen: 'SectionListScreen',
+    });
+  };
+
   return (
     <SafeAreaView style={styles.wrapper}>
       <TouchableOpacity
@@ -20,6 +26,12 @@ const HomeScreen = () => {
         onPress={onPressFlatListButton}
       >
         <Text>FlatList Screen</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.button, { backgroundColor: '#D1B6E1' }]}
+        onPress={onPressSectionListButton}
+      >
+        <Text>SectionList Screen</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -30,6 +42,7 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
+    gap: 20,
     padding: 20,
     backgroundColor: '#fff',
   },
