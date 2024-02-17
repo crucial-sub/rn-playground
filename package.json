@@ -26,6 +26,9 @@
     "!**/.*"
   ],
   "scripts": {
+    "start": "cd ./example && yarn start && cd ..",
+    "ios": "cd ./example && yarn ios && cd ..",
+    "android": "cd ./example && yarn android && cd ..",
     "example": "yarn workspace rn-playground-example",
     "test": "jest",
     "typecheck": "tsc --noEmit",
