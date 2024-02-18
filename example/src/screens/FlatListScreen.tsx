@@ -1,5 +1,7 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import NavBar from '../components/NavBar';
 
 type Item = {
   id: string;
@@ -56,12 +58,15 @@ const FlatListScreen = () => {
   const keyExtractor = (item: Item) => `flat-list-item-${item.id}`;
 
   return (
-    <FlatList
-      style={styles.wrapper}
-      data={ITEMS}
-      renderItem={renderItem}
-      keyExtractor={keyExtractor}
-    />
+    <SafeAreaView style={styles.wrapper}>
+      <NavBar title="FlatList" />
+      <FlatList
+        style={styles.list}
+        data={ITEMS}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+      />
+    </SafeAreaView>
   );
 };
 
@@ -69,6 +74,9 @@ export default FlatListScreen;
 
 const styles = StyleSheet.create({
   wrapper: {
+    flex: 1,
+  },
+  list: {
     flex: 1,
     gap: 10,
   },

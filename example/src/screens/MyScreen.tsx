@@ -1,11 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { StyleSheet, Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const MyScreen = () => {
   return (
-    <View style={styles.wrapper}>
+    <SafeAreaView style={styles.wrapper}>
       <Text>MyScreen</Text>
-    </View>
+    </SafeAreaView>
   );
 };
 
