@@ -1,5 +1,12 @@
-import { SectionList, StyleSheet, Text, View } from 'react-native';
+import {
+  SafeAreaView,
+  SectionList,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React from 'react';
+import NavBar from '../components/NavBar';
 
 type ItemType = {
   id: string;
@@ -90,13 +97,16 @@ const SectionListScreen = () => {
   };
 
   return (
-    <SectionList
-      sections={sections}
-      style={styles.wrapper}
-      keyExtractor={keyExtractor}
-      renderItem={renderItem}
-      renderSectionHeader={renderSectionHeader}
-    />
+    <SafeAreaView style={styles.wrapper}>
+      <NavBar title="SectionList" />
+      <SectionList
+        sections={sections}
+        style={styles.list}
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
+        renderSectionHeader={renderSectionHeader}
+      />
+    </SafeAreaView>
   );
 };
 
@@ -106,6 +116,10 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     paddingVertical: 20,
+    backgroundColor: '#fff',
+  },
+  list: {
+    flex: 1,
   },
   item: {
     padding: 20,
