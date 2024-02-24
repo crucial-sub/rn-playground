@@ -5,10 +5,12 @@ import {
 import React from 'react';
 import FlatListScreen from '../screens/FlatListScreen';
 import SectionListScreen from '../screens/SectionListScreen';
+import AnimationPlaygroundStackNavigator from './AnimationPlaygroundStackNavigator';
 
 export type MainStackParamList = {
   FlatListScreen: undefined;
   SectionListScreen: undefined;
+  AnimationPlaygroundStack: undefined;
 };
 
 export type MainStackNavigationProp = StackNavigationProp<MainStackParamList>;
@@ -22,6 +24,10 @@ const MainStackNavigator = () => {
       <MainStack.Screen
         name="SectionListScreen"
         component={SectionListScreen}
+      />
+      <MainStack.Screen
+        name="AnimationPlaygroundStack"
+        component={AnimationPlaygroundStackNavigator}
       />
     </MainStack.Navigator>
   );

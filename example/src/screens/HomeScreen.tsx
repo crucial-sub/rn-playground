@@ -19,6 +19,12 @@ const HomeScreen = () => {
     });
   };
 
+  const onPressAnimationPlaygroundButton = () => {
+    navigation.navigate('MainStack', {
+      screen: 'AnimationPlaygroundStack',
+    });
+  };
+
   return (
     <SafeAreaView style={styles.wrapper}>
       <TouchableOpacity
@@ -27,11 +33,19 @@ const HomeScreen = () => {
       >
         <Text>FlatList Screen</Text>
       </TouchableOpacity>
+
       <TouchableOpacity
         style={[styles.button, { backgroundColor: '#D1B6E1' }]}
         onPress={onPressSectionListButton}
       >
         <Text>SectionList Screen</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={[styles.button, { backgroundColor: '#3e92ff' }]}
+        onPress={onPressAnimationPlaygroundButton}
+      >
+        <Text>AnimationPlayground Screen</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
