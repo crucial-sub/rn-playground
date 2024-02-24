@@ -10,6 +10,7 @@
     "forceConsistentCasingInFileNames": true,
     "jsx": "react",
     "lib": ["esnext"],
+    "typeRoots": ["types"],
     "module": "esnext",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
