@@ -1,8 +1,8 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import LeftChevron from '../assets/images/left-chevron.png';
 import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import ArrowBack from '../assets/images/arrow-back.svg';
 
 interface NavBarProps {
   onPressBack?: () => void;
@@ -27,10 +27,7 @@ const NavBar = ({ onPressBack, title }: NavBarProps) => {
         onPress={handlePressBack}
         hitSlop={{ top: 10, right: 10, bottom: 10, left: 10 }}
       >
-        <Image
-          style={[styles.button, styles.leftButton]}
-          source={LeftChevron}
-        />
+        <ArrowBack />
       </TouchableOpacity>
 
       {title?.length && <Text style={styles.title}>{title}</Text>}
@@ -49,10 +46,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    paddingHorizontal: 20,
   },
   button: {
-    width: 24,
-    height: 24,
+    width: 25,
+    height: 25,
   },
   leftButton: {
     marginLeft: 15,
@@ -62,6 +60,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: '700',
+    fontWeight: '500',
   },
 });
