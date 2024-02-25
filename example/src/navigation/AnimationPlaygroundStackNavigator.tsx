@@ -3,12 +3,12 @@ import {
   type StackNavigationProp,
 } from '@react-navigation/stack';
 import React from 'react';
-import CustomTransitionScreen from '../screens/animations/CustomTransitionScreen';
+import LayoutAnimationScreen from '../screens/animations/LayoutAnimationScreen';
 import AnimationPlaygroundScreen from '../screens/animations';
 
 type AnimationPlaygroundStackParamList = {
   AnimationPlaygroundScreen: undefined;
-  CustomTransitionScreen: undefined;
+  LayoutAnimationScreen: undefined;
 };
 
 export type AnimationPlaygroundStackNavigationProp =
@@ -28,8 +28,8 @@ const AnimationPlaygroundStackNavigator = () => {
         component={AnimationPlaygroundScreen}
       />
       <AnimationPlaygroundStack.Screen
-        name="CustomTransitionScreen"
-        component={CustomTransitionScreen}
+        name="LayoutAnimationScreen"
+        component={LayoutAnimationScreen}
       />
     </AnimationPlaygroundStack.Navigator>
   );
