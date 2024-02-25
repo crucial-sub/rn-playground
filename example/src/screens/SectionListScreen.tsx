@@ -116,7 +116,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     paddingVertical: 20,
-    backgroundColor: '#fff',
   },
   list: {
     flex: 1,

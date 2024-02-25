@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: 20,
     padding: 20,
-    backgroundColor: '#fff',
   },
   button: {
     alignItems: 'center',
