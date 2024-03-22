@@ -3,12 +3,14 @@ import {
   type StackNavigationProp,
 } from '@react-navigation/stack';
 import React from 'react';
-import LayoutAnimationScreen from '../screens/animations/LayoutAnimationScreen';
 import AnimationPlaygroundScreen from '../screens/animations';
+import LayoutAnimationScreen from '../screens/animations/LayoutAnimationScreen';
+import GestureHandlerScreen from '../screens/GestureHandlerScreen';
 
 type AnimationPlaygroundStackParamList = {
   AnimationPlaygroundScreen: undefined;
   LayoutAnimationScreen: undefined;
+  GestureHandlerScreen: undefined;
 };
 
 export type AnimationPlaygroundStackNavigationProp =
@@ -30,6 +32,10 @@ const AnimationPlaygroundStackNavigator = () => {
       <AnimationPlaygroundStack.Screen
         name="LayoutAnimationScreen"
         component={LayoutAnimationScreen}
+      />
+      <AnimationPlaygroundStack.Screen
+        name="GestureHandlerScreen"
+        component={GestureHandlerScreen}
       />
     </AnimationPlaygroundStack.Navigator>
   );

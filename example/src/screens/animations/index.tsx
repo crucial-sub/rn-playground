@@ -13,16 +13,30 @@ const AnimationPlaygroundScreen = () => {
     navigation.navigate('LayoutAnimationScreen');
   };
 
+  const handlePressGestureHandlerScreen = () => {
+    navigation.navigate('GestureHandlerScreen');
+  };
+
   return (
     <SafeAreaView style={styles.wrapper}>
       <NavBar title="animations" />
 
-      <ScrollView style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+      >
         <TouchableOpacity
           style={[styles.button, { backgroundColor: '#ff3ebb' }]}
           onPress={handlePressCustomTransitionScreen}
         >
           <Text>LayoutAnimationScreen</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: '#008DDA' }]}
+          onPress={handlePressGestureHandlerScreen}
+        >
+          <Text>GestureHandler</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
@@ -34,6 +48,9 @@ export default AnimationPlaygroundScreen;
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
+  },
+  contentContainer: {
+    gap: 20,
   },
   container: {
     padding: 20,
