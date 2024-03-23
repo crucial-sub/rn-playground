@@ -3,13 +3,13 @@ import {
   type StackNavigationProp,
 } from '@react-navigation/stack';
 import React from 'react';
+import HomeScreen from '../screens/HomeScreen';
 import AnimationStackNavigator, {
   type AnimationStackParamList,
 } from './AnimationStackNavigator';
 import ListViewStackNavigator, {
   type ListViewStackParamList,
 } from './ListViewStackNavigator';
-import HomeScreen from '../screens/HomeScreen';
 
 export type MainStackParamList = {
   Home: undefined;

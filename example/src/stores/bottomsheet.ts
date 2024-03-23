@@ -2,14 +2,32 @@ import { create } from 'zustand';
 
 interface BottomSheetState {
   isOpened: boolean;
-  onClose: () => void;
-  setIsOpened: (isOpened: boolean) => void;
-  setOnClose: (onClose: () => void) => void;
+  component: React.ReactNode | null;
+  height: number;
+  afterClose?: () => void;
+  showBottomSheet: (
+    component: React.ReactNode,
+    height?: number,
+    afterClose?: () => void
+  ) => void;
+  closeBottomSheet: () => void;
 }
 
 export const useBottomSheetStore = create<BottomSheetState>((set) => ({
   isOpened: false,
-  onClose: () => {},
-  setIsOpened: (isOpened: boolean) => set({ isOpened }),
-  setOnClose: (onClose: () => void) => set({ onClose }),
+  component: null,
+  height: 350,
+  afterClose: () => {},
+  showBottomSheet: (
+    component: React.ReactNode,
+    height?: number,
+    afterClose?: () => void
+  ) => set({ isOpened: true, component, afterClose, height: height || 350 }),
+  closeBottomSheet: () =>
+    set({
+      isOpened: false,
+      component: null,
+      height: 350,
+      afterClose: () => {},
+    }),
 }));

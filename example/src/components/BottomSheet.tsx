@@ -20,48 +20,48 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
-import PokeBall from '../assets/images/pokeball.svg';
 import { useBottomSheetStore } from '../stores/bottomsheet';
 
 const DEFAULT_HEIGHT = 350;
 
 const BottomSheet = () => {
-  const { isOpened, onClose, setIsOpened } = useBottomSheetStore();
+  const { isOpened, component, height, afterClose, closeBottomSheet } =
+    useBottomSheetStore();
 
   const [shouldCloseModal, setShouldCloseModal] = useState(false);
 
   const startHeight = useSharedValue(0);
-  const translateY = useSharedValue(DEFAULT_HEIGHT);
-  const height = useSharedValue(DEFAULT_HEIGHT);
+  const translateY = useSharedValue(height);
+  const bottomSheetHeight = useSharedValue(height);
 
-  const closeBottomSheet = React.useCallback(() => {
-    if (onClose !== undefined) {
-      onClose();
+  const requestClose = React.useCallback(() => {
+    closeBottomSheet();
+
+    if (afterClose !== undefined) {
+      afterClose();
     }
-
-    setIsOpened(false);
-  }, [onClose]);
+  }, [afterClose]);
 
   const panGestureEvent = Gesture.Pan()
     .onStart(() => {
-      startHeight.value = height.value;
+      startHeight.value = bottomSheetHeight.value;
     })
     .onUpdate((event) => {
-      height.value = startHeight.value - event.translationY;
+      bottomSheetHeight.value = startHeight.value - event.translationY;
     })
     .onEnd((_) => {
-      if (height.value > 500) {
-        height.value = withSpring(700);
-      } else if (height.value > 400) {
-        height.value = withSpring(DEFAULT_HEIGHT);
+      if (bottomSheetHeight.value > 500) {
+        bottomSheetHeight.value = withSpring(700);
+      } else if (bottomSheetHeight.value > 400) {
+        bottomSheetHeight.value = withSpring(height);
       } else {
-        runOnJS(closeBottomSheet)();
+        runOnJS(requestClose)();
       }
     });
 
   const containerAnimatedStyle = useAnimatedStyle(() => {
     return {
-      height: height.value,
+      height: bottomSheetHeight.value,
       transform: [{ translateY: translateY.value }],
     };
   });
@@ -70,10 +70,10 @@ const BottomSheet = () => {
     if (isOpened) {
       setShouldCloseModal(true);
       translateY.value = withTiming(0);
-      height.value = DEFAULT_HEIGHT;
+      bottomSheetHeight.value = height;
     } else {
       translateY.value = withTiming(
-        DEFAULT_HEIGHT + height.value,
+        height + bottomSheetHeight.value,
         { duration: 200 },
         () => {
           runOnJS(setShouldCloseModal)(false);
@@ -88,10 +88,10 @@ const BottomSheet = () => {
       animationType="fade"
       transparent
       visible={shouldCloseModal}
-      onRequestClose={closeBottomSheet}
+      onRequestClose={requestClose}
     >
       <GestureHandlerRootView style={styles.wrapper}>
-        <TouchableWithoutFeedback onPress={closeBottomSheet}>
+        <TouchableWithoutFeedback onPress={requestClose}>
           <Animated.View
             entering={FadeIn}
             exiting={FadeOut}
@@ -106,9 +106,7 @@ const BottomSheet = () => {
             </View>
           </GestureDetector>
 
-          <View style={styles.contentContainer}>
-            <PokeBall width={64} height={64} style={styles.image} />
-          </View>
+          <View style={styles.contentContainer}>{component}</View>
         </Animated.View>
       </GestureHandlerRootView>
     </Modal>
@@ -120,7 +118,6 @@ type Style = {
   dimmer: ViewStyle;
   container: ViewStyle;
   contentContainer: ViewStyle;
-  image: ViewStyle;
   handleContainer: ViewStyle;
   handle: ViewStyle;
 };
@@ -145,10 +142,6 @@ const styles = StyleSheet.create<Style>({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  image: {
-    width: 64,
-    height: 64,
   },
   handleContainer: {
     alignItems: 'center',

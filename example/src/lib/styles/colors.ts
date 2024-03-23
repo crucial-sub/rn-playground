@@ -13,4 +13,5 @@ export const Colors = {
   text: '#040316',
   accent: '#443DFF',
   gray: '#939396',
+  lightGray: '#F0F0F0',
 };

@@ -10,12 +10,13 @@ import {
 import ScreenWrapper from '../components/ScreenWrapper';
 import { useBottomSheetStore } from '../stores/bottomsheet';
 import { Colors } from '../lib/styles/colors';
+import PokeBall from '../assets/images/pokeball.svg';
 
 const GestureHandlerScreen = () => {
-  const { setIsOpened } = useBottomSheetStore();
+  const { showBottomSheet } = useBottomSheetStore();
 
   const onOpen = () => {
-    setIsOpened(true);
+    showBottomSheet(<PokeBall width={64} height={64} style={styles.image} />);
   };
 
   return (
@@ -36,6 +37,7 @@ type Style = {
   button: ViewStyle;
   buttonText: TextStyle;
   title: TextStyle;
+  image: ViewStyle;
 };
 
 const styles = StyleSheet.create<Style>({
@@ -59,6 +61,10 @@ const styles = StyleSheet.create<Style>({
     fontSize: 16,
     fontWeight: '600',
     color: Colors.background,
+  },
+  image: {
+    width: 64,
+    height: 64,
   },
 });
 
