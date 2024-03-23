@@ -3,14 +3,24 @@ import {
   type StackNavigationProp,
 } from '@react-navigation/stack';
 import React from 'react';
-import FlatListScreen from '../screens/FlatListScreen';
-import SectionListScreen from '../screens/SectionListScreen';
-import AnimationPlaygroundStackNavigator from './AnimationPlaygroundStackNavigator';
+import AnimationStackNavigator, {
+  type AnimationStackParamList,
+} from './AnimationStackNavigator';
+import ListViewStackNavigator, {
+  type ListViewStackParamList,
+} from './ListViewStackNavigator';
+import HomeScreen from '../screens/HomeScreen';
 
 export type MainStackParamList = {
-  FlatListScreen: undefined;
-  SectionListScreen: undefined;
-  AnimationPlaygroundStack: undefined;
+  Home: undefined;
+  ListViewStack: {
+    screen: keyof ListViewStackParamList;
+    params: ListViewStackParamList[keyof ListViewStackParamList];
+  };
+  AnimationStack: {
+    screen: keyof AnimationStackParamList;
+    params: AnimationStackParamList[keyof AnimationStackParamList];
+  };
 };
 
 export type MainStackNavigationProp = StackNavigationProp<MainStackParamList>;
@@ -19,15 +29,18 @@ const MainStack = createStackNavigator<MainStackParamList>();
 
 const MainStackNavigator = () => {
   return (
-    <MainStack.Navigator screenOptions={{ headerShown: false }}>
-      <MainStack.Screen name="FlatListScreen" component={FlatListScreen} />
+    <MainStack.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName="Home"
+    >
+      <MainStack.Screen name="Home" component={HomeScreen} />
       <MainStack.Screen
-        name="SectionListScreen"
-        component={SectionListScreen}
+        name="ListViewStack"
+        component={ListViewStackNavigator}
       />
       <MainStack.Screen
-        name="AnimationPlaygroundStack"
-        component={AnimationPlaygroundStackNavigator}
+        name="AnimationStack"
+        component={AnimationStackNavigator}
       />
     </MainStack.Navigator>
   );

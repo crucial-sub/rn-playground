@@ -3,10 +3,10 @@ import React from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ScreenWrapper from '../../components/ScreenWrapper';
-import type { AnimationPlaygroundStackNavigationProp } from '../../navigation/AnimationPlaygroundStackNavigator';
+import type { AnimationStackNavigationProp } from '../../navigation/AnimationStackNavigator';
 
 const AnimationPlaygroundScreen = () => {
-  const navigation = useNavigation<AnimationPlaygroundStackNavigationProp>();
+  const navigation = useNavigation<AnimationStackNavigationProp>();
 
   const handlePressCustomTransitionScreen = () => {
     navigation.navigate('LayoutAnimationScreen');

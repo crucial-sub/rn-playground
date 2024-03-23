@@ -1,52 +1,72 @@
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
-import type { RootStackNavigationProp } from './MainScreen';
+import Avatar from '../assets/images/avatar.png';
+import ListViewThumbnail from '../assets/images/listview_thumbnail.png';
+import AnimationThumbnail from '../assets/images/animation_thumbnail.png';
+import ChevronRight from '../assets/images/chevron_right.svg';
+import { Colors } from '../lib/styles/colors';
+import type { MainStackNavigationProp } from '../navigation/MainStackNavigator';
 
 const HomeScreen = () => {
-  const navigation = useNavigation<RootStackNavigationProp>();
+  const navigation = useNavigation<MainStackNavigationProp>();
 
   const onPressFlatListButton = () => {
-    navigation.navigate('MainStack', {
-      screen: 'FlatListScreen',
-    });
-  };
-
-  const onPressSectionListButton = () => {
-    navigation.navigate('MainStack', {
-      screen: 'SectionListScreen',
+    navigation.navigate('ListViewStack', {
+      screen: 'ListViewScreen',
+      params: undefined,
     });
   };
 
   const onPressAnimationPlaygroundButton = () => {
-    navigation.navigate('MainStack', {
-      screen: 'AnimationPlaygroundStack',
+    navigation.navigate('AnimationStack', {
+      screen: 'AnimationScreen',
+      params: undefined,
     });
   };
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <TouchableOpacity
-        style={[styles.button, { backgroundColor: '#58C9B9' }]}
-        onPress={onPressFlatListButton}
-      >
-        <Text>FlatList Screen</Text>
-      </TouchableOpacity>
+      <ScrollView>
+        <View style={styles.header}>
+          <Image source={Avatar} style={styles.avatar} />
+          <Text style={styles.headerTitle}>Hello, Hoon</Text>
+        </View>
 
-      <TouchableOpacity
-        style={[styles.button, { backgroundColor: '#D1B6E1' }]}
-        onPress={onPressSectionListButton}
-      >
-        <Text>SectionList Screen</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.listButton}
+          onPress={onPressFlatListButton}
+        >
+          <Image style={styles.thumbnail} source={ListViewThumbnail} />
+          <View style={styles.listTextContainer}>
+            <Text style={styles.listTitle}>ListView Playground</Text>
+            <Text style={styles.listDescription}>learn about ListViews</Text>
+          </View>
 
-      <TouchableOpacity
-        style={[styles.button, { backgroundColor: '#3e92ff' }]}
-        onPress={onPressAnimationPlaygroundButton}
-      >
-        <Text>AnimationPlayground Screen</Text>
-      </TouchableOpacity>
+          <ChevronRight />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.listButton}
+          onPress={onPressAnimationPlaygroundButton}
+        >
+          <Image style={styles.thumbnail} source={AnimationThumbnail} />
+          <View style={styles.listTextContainer}>
+            <Text style={styles.listTitle}>Animations Playground</Text>
+            <Text style={styles.listDescription}>play with animations</Text>
+          </View>
+
+          <ChevronRight />
+        </TouchableOpacity>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -56,13 +76,54 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    gap: 20,
-    padding: 20,
+    paddingHorizontal: 20,
+    gap: 24,
   },
-  button: {
+  header: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: 16,
+    gap: 15,
+    paddingVertical: 10,
+    marginBottom: 24,
+  },
+  avatar: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+  },
+  headerTitle: {
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: '600',
+    lineHeight: 32,
+    marginBottom: 24,
+  },
+  thumbnail: {
+    width: 64,
+    height: 80,
     borderRadius: 12,
+  },
+  listButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 15,
+    gap: 15,
+    borderRadius: 12,
+  },
+  listTextContainer: {
+    flex: 1,
+    gap: 20,
+    paddingVertical: 5,
+  },
+  listTitle: {
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  listDescription: {
+    fontSize: 14,
+    color: Colors.gray,
   },
 });

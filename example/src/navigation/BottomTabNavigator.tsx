@@ -4,8 +4,8 @@ import {
   getBottomTabOptions,
   type HomeTabParamList,
 } from '../lib/utils/bottom-tab-helper';
-import HomeScreen from '../screens/HomeScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import MainStackNavigator from './MainStackNavigator';
 
 const BottomTab = createBottomTabNavigator<HomeTabParamList>();
 
@@ -18,7 +18,7 @@ const BottomTabNavigator = () => {
       <BottomTab.Screen
         options={({ route }) => getBottomTabOptions(route.name)}
         name="HomeTab"
-        component={HomeScreen}
+        component={MainStackNavigator}
       />
       <BottomTab.Screen
         options={({ route }) => getBottomTabOptions(route.name)}
