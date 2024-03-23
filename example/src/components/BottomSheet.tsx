@@ -28,7 +28,7 @@ const DEFAULT_HEIGHT = 350;
 const BottomSheet = () => {
   const { isOpened, onClose, setIsOpened } = useBottomSheetStore();
 
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [shouldCloseModal, setShouldCloseModal] = useState(false);
 
   const startHeight = useSharedValue(0);
   const translateY = useSharedValue(DEFAULT_HEIGHT);
@@ -68,7 +68,7 @@ const BottomSheet = () => {
 
   React.useEffect(() => {
     if (isOpened) {
-      setIsSheetOpen(true);
+      setShouldCloseModal(true);
       translateY.value = withTiming(0);
       height.value = DEFAULT_HEIGHT;
     } else {
@@ -76,7 +76,7 @@ const BottomSheet = () => {
         DEFAULT_HEIGHT + height.value,
         { duration: 200 },
         () => {
-          runOnJS(setIsSheetOpen)(false);
+          runOnJS(setShouldCloseModal)(false);
         }
       );
     }
@@ -87,7 +87,7 @@ const BottomSheet = () => {
       style={styles.wrapper}
       animationType="fade"
       transparent
-      visible={isSheetOpen}
+      visible={shouldCloseModal}
       onRequestClose={closeBottomSheet}
     >
       <GestureHandlerRootView style={styles.wrapper}>
