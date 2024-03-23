@@ -12,4 +12,5 @@ export const Colors = {
   background: '#FBFBFE',
   text: '#040316',
   accent: '#443DFF',
+  gray: '#939396',
 };

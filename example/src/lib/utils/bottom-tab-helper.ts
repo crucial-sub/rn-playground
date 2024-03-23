@@ -15,7 +15,7 @@ export type HomeTabNavigationProp = BottomTabNavigationProp<HomeTabParamList>;
 
 const defaultOptions: BottomTabNavigationOptions = {
   tabBarActiveTintColor: Colors.accent,
-  tabBarInactiveTintColor: Colors.text,
+  tabBarInactiveTintColor: Colors.gray,
 };
 
 export const getBottomTabOptions = (
