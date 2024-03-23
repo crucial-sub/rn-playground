@@ -1,17 +1,11 @@
-import {
-  createBottomTabNavigator,
-  type BottomTabNavigationProp,
-} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
+import {
+  getBottomTabOptions,
+  type HomeTabParamList,
+} from '../lib/utils/bottom-tab-helper';
 import HomeScreen from '../screens/HomeScreen';
-import MyScreen from '../screens/MyScreen';
-
-export type HomeTabParamList = {
-  HomeTab: undefined;
-  MyTab: undefined;
-};
-
-export type HomeTabNavigationProp = BottomTabNavigationProp<HomeTabParamList>;
+import SettingsScreen from '../screens/SettingsScreen';
 
 const BottomTab = createBottomTabNavigator<HomeTabParamList>();
 
@@ -21,8 +15,16 @@ const BottomTabNavigator = () => {
       screenOptions={{ headerShown: false }}
       initialRouteName="HomeTab"
     >
-      <BottomTab.Screen name="HomeTab" component={HomeScreen} />
-      <BottomTab.Screen name="MyTab" component={MyScreen} />
+      <BottomTab.Screen
+        options={({ route }) => getBottomTabOptions(route.name)}
+        name="HomeTab"
+        component={HomeScreen}
+      />
+      <BottomTab.Screen
+        options={({ route }) => getBottomTabOptions(route.name)}
+        name="SettingsTab"
+        component={SettingsScreen}
+      />
     </BottomTab.Navigator>
   );
 };
