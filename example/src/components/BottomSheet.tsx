@@ -55,7 +55,7 @@ const BottomSheet = () => {
       } else if (height.value > 400) {
         height.value = withSpring(DEFAULT_HEIGHT);
       } else {
-        runOnJS(closeBottomSheet);
+        runOnJS(closeBottomSheet)();
       }
     });
 

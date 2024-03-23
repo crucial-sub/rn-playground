@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import ScreenWrapper from '../components/ScreenWrapper';
 import { useBottomSheetStore } from '../stores/bottomsheet';
+import { Colors } from '../lib/styles/colors';
 
 const GestureHandlerScreen = () => {
   const { setIsOpened } = useBottomSheetStore();
@@ -18,17 +19,15 @@ const GestureHandlerScreen = () => {
   };
 
   return (
-    <>
-      <ScreenWrapper>
-        <View style={styles.container}>
-          <Text style={styles.title}>Gesture Handler Screen!</Text>
+    <ScreenWrapper>
+      <View style={styles.container}>
+        <Text style={styles.title}>Gesture Handler Screen</Text>
 
-          <TouchableOpacity style={styles.button} onPress={onOpen}>
-            <Text style={styles.buttonText}>Open Bottom Sheet</Text>
-          </TouchableOpacity>
-        </View>
-      </ScreenWrapper>
-    </>
+        <TouchableOpacity style={styles.button} onPress={onOpen}>
+          <Text style={styles.buttonText}>Open BottomSheet</Text>
+        </TouchableOpacity>
+      </View>
+    </ScreenWrapper>
   );
 };
 
@@ -42,23 +41,24 @@ type Style = {
 const styles = StyleSheet.create<Style>({
   container: {
     flex: 1,
-    padding: 20,
+    paddingHorizontal: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: '700',
+    marginBottom: 24,
   },
   button: {
     alignItems: 'center',
     justifyContent: 'center',
     padding: 16,
     borderRadius: 12,
-    backgroundColor: '#ff3ebb',
+    backgroundColor: Colors.primary,
   },
   buttonText: {
     fontSize: 16,
-    color: '#fff',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: '700',
-    marginBottom: 24,
+    fontWeight: '600',
+    color: Colors.background,
   },
 });
 
