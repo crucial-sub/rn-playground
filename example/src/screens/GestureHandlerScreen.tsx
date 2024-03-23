@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,14 +7,14 @@ import {
   type TextStyle,
   type ViewStyle,
 } from 'react-native';
-import BottomSheet from '../components/BottomSheet';
 import ScreenWrapper from '../components/ScreenWrapper';
+import { useBottomSheetStore } from '../stores/bottomsheet';
 
 const GestureHandlerScreen = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const { setIsOpened } = useBottomSheetStore();
 
-  const onClose = () => {
-    setIsVisible(false);
+  const onOpen = () => {
+    setIsOpened(true);
   };
 
   return (
@@ -23,16 +23,11 @@ const GestureHandlerScreen = () => {
         <View style={styles.container}>
           <Text style={styles.title}>Gesture Handler Screen!</Text>
 
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => setIsVisible(true)}
-          >
+          <TouchableOpacity style={styles.button} onPress={onOpen}>
             <Text style={styles.buttonText}>Open Bottom Sheet</Text>
           </TouchableOpacity>
         </View>
       </ScreenWrapper>
-
-      <BottomSheet isVisible={isVisible} onClose={onClose} />
     </>
   );
 };

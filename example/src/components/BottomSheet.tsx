@@ -6,7 +6,11 @@ import {
   View,
   type ViewStyle,
 } from 'react-native';
-import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import {
+  Gesture,
+  GestureDetector,
+  GestureHandlerRootView,
+} from 'react-native-gesture-handler';
 import Animated, {
   FadeIn,
   FadeOut,
@@ -17,20 +21,26 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import PokeBall from '../assets/images/pokeball.svg';
+import { useBottomSheetStore } from '../stores/bottomsheet';
 
 const DEFAULT_HEIGHT = 350;
 
-interface Props {
-  isVisible: boolean;
-  onClose: () => void;
-}
+const BottomSheet = () => {
+  const { isOpened, onClose, setIsOpened } = useBottomSheetStore();
 
-const BottomSheet = ({ isVisible, onClose }: Props) => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const startHeight = useSharedValue(0);
   const translateY = useSharedValue(DEFAULT_HEIGHT);
   const height = useSharedValue(DEFAULT_HEIGHT);
+
+  const closeBottomSheet = React.useCallback(() => {
+    if (onClose !== undefined) {
+      onClose();
+    }
+
+    setIsOpened(false);
+  }, [onClose]);
 
   const panGestureEvent = Gesture.Pan()
     .onStart(() => {
@@ -45,7 +55,7 @@ const BottomSheet = ({ isVisible, onClose }: Props) => {
       } else if (height.value > 400) {
         height.value = withSpring(DEFAULT_HEIGHT);
       } else {
-        runOnJS(onClose)();
+        runOnJS(closeBottomSheet);
       }
     });
 
@@ -57,16 +67,20 @@ const BottomSheet = ({ isVisible, onClose }: Props) => {
   });
 
   React.useEffect(() => {
-    if (isVisible) {
+    if (isOpened) {
       setIsSheetOpen(true);
       translateY.value = withTiming(0);
       height.value = DEFAULT_HEIGHT;
     } else {
-      translateY.value = withTiming(DEFAULT_HEIGHT + height.value, {}, () => {
-        runOnJS(setIsSheetOpen)(false);
-      });
+      translateY.value = withTiming(
+        DEFAULT_HEIGHT + height.value,
+        { duration: 200 },
+        () => {
+          runOnJS(setIsSheetOpen)(false);
+        }
+      );
     }
-  }, [isVisible]);
+  }, [isOpened]);
 
   return (
     <Modal
@@ -74,27 +88,29 @@ const BottomSheet = ({ isVisible, onClose }: Props) => {
       animationType="fade"
       transparent
       visible={isSheetOpen}
-      onRequestClose={onClose}
+      onRequestClose={closeBottomSheet}
     >
-      <TouchableWithoutFeedback onPress={onClose}>
-        <Animated.View
-          entering={FadeIn}
-          exiting={FadeOut}
-          style={styles.dimmer}
-        />
-      </TouchableWithoutFeedback>
+      <GestureHandlerRootView style={styles.wrapper}>
+        <TouchableWithoutFeedback onPress={closeBottomSheet}>
+          <Animated.View
+            entering={FadeIn}
+            exiting={FadeOut}
+            style={styles.dimmer}
+          />
+        </TouchableWithoutFeedback>
 
-      <Animated.View style={[styles.container, containerAnimatedStyle]}>
-        <GestureDetector gesture={panGestureEvent}>
-          <View style={styles.handleContainer}>
-            <View style={styles.handle} />
+        <Animated.View style={[styles.container, containerAnimatedStyle]}>
+          <GestureDetector gesture={panGestureEvent}>
+            <View style={styles.handleContainer}>
+              <View style={styles.handle} />
+            </View>
+          </GestureDetector>
+
+          <View style={styles.contentContainer}>
+            <PokeBall width={64} height={64} style={styles.image} />
           </View>
-        </GestureDetector>
-
-        <View style={styles.contentContainer}>
-          <PokeBall width={64} height={64} style={styles.image} />
-        </View>
-      </Animated.View>
+        </Animated.View>
+      </GestureHandlerRootView>
     </Modal>
   );
 };
