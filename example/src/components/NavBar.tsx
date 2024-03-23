@@ -9,11 +9,11 @@ interface NavBarProps {
   title?: string;
 }
 
-const NavBar = ({ onPressBack, title }: NavBarProps) => {
+const NavBar = ({ onPressBack, title = '' }: NavBarProps) => {
   const navigation = useNavigation();
 
   const handlePressBack = () => {
-    if (onPressBack) {
+    if (onPressBack !== undefined) {
       onPressBack();
     }
 
@@ -30,7 +30,7 @@ const NavBar = ({ onPressBack, title }: NavBarProps) => {
         <ArrowBack />
       </TouchableOpacity>
 
-      {title?.length && <Text style={styles.title}>{title}</Text>}
+      {title.length > 0 && <Text style={styles.title}>{title}</Text>}
 
       <View style={[styles.button, styles.rightButton]} />
     </View>

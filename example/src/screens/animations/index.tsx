@@ -2,8 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import NavBar from '../../components/NavBar';
+import ScreenWrapper from '../../components/ScreenWrapper';
 import type { AnimationPlaygroundStackNavigationProp } from '../../navigation/AnimationPlaygroundStackNavigator';
 
 const AnimationPlaygroundScreen = () => {
@@ -18,9 +17,7 @@ const AnimationPlaygroundScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <NavBar title="animations" />
-
+    <ScreenWrapper style={styles.wrapper} showNavBar navTitle={'Animations'}>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
@@ -39,7 +36,7 @@ const AnimationPlaygroundScreen = () => {
           <Text>GestureHandler</Text>
         </TouchableOpacity>
       </ScrollView>
-    </SafeAreaView>
+    </ScreenWrapper>
   );
 };
 

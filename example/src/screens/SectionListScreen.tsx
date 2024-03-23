@@ -1,12 +1,6 @@
-import {
-  SafeAreaView,
-  SectionList,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
 import React from 'react';
-import NavBar from '../components/NavBar';
+import { SectionList, StyleSheet, Text, View } from 'react-native';
+import ScreenWrapper from '../components/ScreenWrapper';
 
 type ItemType = {
   id: string;
@@ -97,8 +91,7 @@ const SectionListScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <NavBar title="SectionList" />
+    <ScreenWrapper showNavBar navTitle={'SectionList'}>
       <SectionList
         sections={sections}
         style={styles.list}
@@ -106,17 +99,13 @@ const SectionListScreen = () => {
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
       />
-    </SafeAreaView>
+    </ScreenWrapper>
   );
 };
 
 export default SectionListScreen;
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    paddingVertical: 20,
-  },
   list: {
     flex: 1,
   },
