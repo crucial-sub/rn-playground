@@ -2,13 +2,13 @@ import React, { memo } from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
-  View,
   type TextStyle,
   type ViewStyle,
 } from 'react-native';
 import PokeBall from '../assets/images/pokeball.svg';
 import ScreenWrapper from '../components/ScreenWrapper';
 import Text from '../components/Text';
+import View from '../components/View';
 import { Colors } from '../lib/styles/colors';
 import { useBottomSheetStore } from '../stores/bottomsheet';
 

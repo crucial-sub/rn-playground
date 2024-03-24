@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Dimensions,
-  TouchableOpacity,
-  View,
-  useColorScheme,
-} from 'react-native';
+import { Dimensions, TouchableOpacity, useColorScheme } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -19,6 +14,7 @@ import { Colors } from '../lib/styles/colors';
 import { setStorage } from '../lib/utils/storage';
 import { useThemeStore } from '../stores/style';
 import Text from './Text';
+import View from './View';
 
 const PADDING = 20;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -122,6 +118,7 @@ const stylesheet = createStyleSheet((theme) => ({
     width: '100%',
     flex: 1,
     padding: 20,
+    backgroundColor: theme.bottomSheet,
   },
   title: {
     fontSize: 24,
@@ -140,7 +137,7 @@ const stylesheet = createStyleSheet((theme) => ({
     justifyContent: 'space-between',
     marginVertical: 16,
     padding: CONTAINER_PADDING,
-    backgroundColor: Colors.lightGray,
+    backgroundColor: theme.tab.background,
     borderRadius: 30,
   },
   tab: {
@@ -161,7 +158,7 @@ const stylesheet = createStyleSheet((theme) => ({
     top: CONTAINER_PADDING,
     height: '100%',
     width: CONTAINER_WIDTH / 3,
-    backgroundColor: theme.background.primary,
+    backgroundColor: theme.tab.indicator,
     borderRadius: 30,
   },
 }));

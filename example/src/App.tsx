@@ -21,6 +21,7 @@ export default function App() {
         card: styles.themeColors.backgroundColor,
         text: styles.themeColors.text,
         primary: styles.themeColors.primary,
+        border: styles.themeColors.border,
       },
     };
   }, [styles]);
@@ -38,5 +39,6 @@ const stylesheet = createStyleSheet((theme) => ({
     backgroundColor: theme.background.primary,
     text: theme.text.primary,
     primary: theme.general.primary,
+    border: theme.text.secondary,
   },
 }));

@@ -2,6 +2,8 @@ export interface IColors {
   text: TextColors;
   general: GeneralColors;
   background: BackgroundColors;
+  tab: TabColors;
+  bottomSheet: string;
 }
 
 type Colors = {
@@ -28,6 +30,11 @@ type BackgroundColors = {
   primary: string;
 };
 
+type TabColors = {
+  background: string;
+  indicator: string;
+};
+
 export const Colors = {
   primary: '#27CE9C',
   secondary: '#DDDBFF',
@@ -52,6 +59,11 @@ export const LightColors: IColors = {
   background: {
     primary: '#FBFBFE',
   },
+  tab: {
+    background: '#F0F0F0',
+    indicator: '#FBFBFE',
+  },
+  bottomSheet: '#FBFBFE',
 };
 
 export const DarkColors: IColors = {
@@ -68,4 +80,9 @@ export const DarkColors: IColors = {
   background: {
     primary: '#010104',
   },
+  tab: {
+    background: '#010104',
+    indicator: '#1F272B',
+  },
+  bottomSheet: '#1F272B',
 };

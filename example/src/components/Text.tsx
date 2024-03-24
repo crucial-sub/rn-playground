@@ -6,7 +6,7 @@ const Text = (props: TextProps) => {
   const { styles } = useStyles(stylesheet);
 
   return (
-    <RNText {...props} style={[props.style, styles.text]}>
+    <RNText {...props} style={[styles.text, props.style]}>
       {props.children}
     </RNText>
   );

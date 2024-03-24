@@ -1,9 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import ArrowBack from '../assets/images/arrow-back.svg';
+import { LightColors } from '../lib/styles/colors';
 import Text from './Text';
+import View from './View';
 
 interface NavBarProps {
   onPressBack?: () => void;
@@ -12,6 +14,7 @@ interface NavBarProps {
 
 const NavBar = ({ onPressBack, title = '' }: NavBarProps) => {
   const navigation = useNavigation();
+  const { styles } = useStyles(stylesheet);
 
   const handlePressBack = () => {
     if (onPressBack !== undefined) {
@@ -28,7 +31,7 @@ const NavBar = ({ onPressBack, title = '' }: NavBarProps) => {
         onPress={handlePressBack}
         hitSlop={{ top: 10, right: 10, bottom: 10, left: 10 }}
       >
-        <ArrowBack />
+        <ArrowBack stroke={LightColors.text.secondary} />
       </TouchableOpacity>
 
       {title.length > 0 && <Text style={styles.title}>{title}</Text>}
@@ -40,7 +43,7 @@ const NavBar = ({ onPressBack, title = '' }: NavBarProps) => {
 
 export default NavBar;
 
-const styles = StyleSheet.create({
+const stylesheet = createStyleSheet((theme) => ({
   wrapper: {
     height: 60,
     width: '100%',
@@ -63,4 +66,4 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '500',
   },
-});
+}));

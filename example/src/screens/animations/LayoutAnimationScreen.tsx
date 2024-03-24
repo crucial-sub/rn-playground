@@ -1,8 +1,9 @@
 import React from 'react';
-import { FlatList, StyleSheet, Switch, View } from 'react-native';
+import { FlatList, StyleSheet, Switch } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import NavBar from '../../components/NavBar';
 import Text from '../../components/Text';
+import View from '../../components/View';
 
 interface Data {
   id: string;

@@ -1,11 +1,5 @@
 import React, { memo, useState } from 'react';
-import {
-  Modal,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-  type ViewStyle,
-} from 'react-native';
+import { Modal, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import {
   Gesture,
   GestureDetector,
@@ -20,11 +14,14 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
+import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import { useBottomSheetStore } from '../stores/bottomsheet';
+import View from './View';
 
 const BottomSheet = () => {
   const { isOpened, component, height, afterClose, closeBottomSheet } =
     useBottomSheetStore();
+  const { styles } = useStyles(stylesheet);
 
   const [shouldCloseModal, setShouldCloseModal] = useState(false);
 
@@ -111,16 +108,7 @@ const BottomSheet = () => {
   );
 };
 
-type Style = {
-  wrapper: ViewStyle;
-  dimmer: ViewStyle;
-  container: ViewStyle;
-  contentContainer: ViewStyle;
-  handleContainer: ViewStyle;
-  handle: ViewStyle;
-};
-
-const styles = StyleSheet.create<Style>({
+const stylesheet = createStyleSheet((theme) => ({
   wrapper: {
     flex: 1,
   },
@@ -132,18 +120,20 @@ const styles = StyleSheet.create<Style>({
     ...StyleSheet.absoluteFillObject,
     top: 'auto',
     bottom: 0,
-    backgroundColor: '#fff',
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
+    overflow: 'hidden',
   },
   contentContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: theme.bottomSheet,
   },
   handleContainer: {
     alignItems: 'center',
     paddingVertical: 12,
+    backgroundColor: theme.bottomSheet,
   },
   handle: {
     width: 35,
@@ -151,6 +141,6 @@ const styles = StyleSheet.create<Style>({
     borderRadius: 3,
     backgroundColor: '#ccc',
   },
-});
+}));
 
 export default memo(BottomSheet);

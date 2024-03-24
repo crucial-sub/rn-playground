@@ -1,18 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Image, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AnimationThumbnail from '../assets/images/animation_thumbnail.png';
 import Avatar from '../assets/images/avatar.png';
 import ChevronRight from '../assets/images/chevron_right.svg';
 import ListViewThumbnail from '../assets/images/listview_thumbnail.png';
 import Text from '../components/Text';
+import View from '../components/View';
 import { Colors } from '../lib/styles/colors';
 import type { MainStackNavigationProp } from '../navigation/MainStackNavigator';
 

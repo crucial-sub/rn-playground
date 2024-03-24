@@ -1,7 +1,8 @@
 import React from 'react';
-import { SectionList, StyleSheet, View } from 'react-native';
+import { SectionList, StyleSheet } from 'react-native';
 import ScreenWrapper from '../../components/ScreenWrapper';
 import Text from '../../components/Text';
+import View from '../../components/View';
 
 type ItemType = {
   id: string;
