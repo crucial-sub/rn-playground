@@ -15,6 +15,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { Colors } from '../lib/styles/colors';
+import { setStorage } from '../lib/utils/storage';
 import { useThemeStore } from '../stores/style';
 
 const PADDING = 20;
@@ -69,6 +70,7 @@ const ThemeChangeView = () => {
 
   const handlePressTheme = (_theme: ThemeType) => {
     setSelectedSwitch(_theme);
+    setStorage('theme', _theme);
   };
 
   return (
