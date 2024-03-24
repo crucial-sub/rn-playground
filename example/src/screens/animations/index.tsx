@@ -1,8 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ScreenWrapper from '../../components/ScreenWrapper';
+import Text from '../../components/Text';
 import type { AnimationStackNavigationProp } from '../../navigation/AnimationStackNavigator';
 
 const AnimationPlaygroundScreen = () => {

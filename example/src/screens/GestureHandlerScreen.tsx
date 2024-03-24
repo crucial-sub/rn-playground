@@ -1,16 +1,16 @@
 import React, { memo } from 'react';
 import {
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
   type TextStyle,
   type ViewStyle,
 } from 'react-native';
-import ScreenWrapper from '../components/ScreenWrapper';
-import { useBottomSheetStore } from '../stores/bottomsheet';
-import { Colors } from '../lib/styles/colors';
 import PokeBall from '../assets/images/pokeball.svg';
+import ScreenWrapper from '../components/ScreenWrapper';
+import Text from '../components/Text';
+import { Colors } from '../lib/styles/colors';
+import { useBottomSheetStore } from '../stores/bottomsheet';
 
 const GestureHandlerScreen = () => {
   const { showBottomSheet } = useBottomSheetStore();

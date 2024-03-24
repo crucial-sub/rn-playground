@@ -1,8 +1,9 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BellIcon from '../assets/images/bell_icon.svg';
 import ThemeIcon from '../assets/images/sun_icon.svg';
+import Text from '../components/Text';
 import ThemeChangeView from '../components/ThemeChangeView';
 import { useBottomSheetStore } from '../stores/bottomsheet';
 

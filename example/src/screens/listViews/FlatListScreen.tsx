@@ -1,6 +1,7 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import ScreenWrapper from '../../components/ScreenWrapper';
+import Text from '../../components/Text';
 
 type Item = {
   id: string;

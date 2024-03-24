@@ -1,15 +1,21 @@
-import { FlatList, StyleSheet, Switch, Text, View } from 'react-native';
 import React from 'react';
+import { FlatList, StyleSheet, Switch, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import NavBar from '../../components/NavBar';
+import Text from '../../components/Text';
 
-const DATA = Array.from({ length: 30 }, (_, i) => ({
+interface Data {
+  id: string;
+  title: string;
+}
+
+const DATA: Data[] = Array.from({ length: 30 }, (_, i) => ({
   id: String(i),
   title: `Item ${i + 1}`,
 }));
 
 const LayoutAnimationScreen = () => {
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item }: { item: Data }) => {
     return (
       <View>
         <Text>{item.title}</Text>
@@ -17,7 +23,7 @@ const LayoutAnimationScreen = () => {
     );
   };
 
-  const keyExtractor = (item) => item.id;
+  const keyExtractor = (item: Data) => item.id;
 
   return (
     <SafeAreaView style={styles.wrapper}>

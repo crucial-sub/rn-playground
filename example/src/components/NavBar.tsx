@@ -1,8 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ArrowBack from '../assets/images/arrow-back.svg';
+import Text from './Text';
 
 interface NavBarProps {
   onPressBack?: () => void;

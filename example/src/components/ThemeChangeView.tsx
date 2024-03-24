@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Dimensions,
-  Text,
   TouchableOpacity,
   View,
   useColorScheme,
@@ -19,6 +18,7 @@ import {
 import { Colors } from '../lib/styles/colors';
 import { setStorage } from '../lib/utils/storage';
 import { useThemeStore } from '../stores/style';
+import Text from './Text';
 
 const PADDING = 20;
 const SCREEN_WIDTH = Dimensions.get('window').width;
