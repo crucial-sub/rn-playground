@@ -1,19 +1,21 @@
 import React from 'react';
 import {
   Dimensions,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
   useColorScheme,
-  type TextStyle,
-  type ViewStyle,
 } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import {
+  UnistylesRuntime,
+  createStyleSheet,
+  useStyles,
+} from 'react-native-unistyles';
 import { Colors } from '../lib/styles/colors';
 import { setStorage } from '../lib/utils/storage';
 import { useThemeStore } from '../stores/style';
@@ -28,6 +30,7 @@ type ThemeType = 'system' | 'light' | 'dark';
 
 const ThemeChangeView = () => {
   const colorScheme = useColorScheme();
+  const { styles } = useStyles(stylesheet);
   const left = useSharedValue(CONTAINER_PADDING);
 
   const indicatorAnimatedStyle = useAnimatedStyle(() => {
@@ -36,8 +39,7 @@ const ThemeChangeView = () => {
     };
   });
 
-  const { theme, selectedSwitch, setTheme, setSelectedSwitch } =
-    useThemeStore();
+  const { selectedSwitch, setTheme, setSelectedSwitch } = useThemeStore();
 
   React.useEffect(() => {
     switch (selectedSwitch) {
@@ -71,6 +73,12 @@ const ThemeChangeView = () => {
   const handlePressTheme = (_theme: ThemeType) => {
     setSelectedSwitch(_theme);
     setStorage('theme', _theme);
+
+    if (_theme === 'system') {
+      UnistylesRuntime.setTheme(colorScheme || 'light');
+    } else {
+      UnistylesRuntime.setTheme(_theme);
+    }
   };
 
   return (
@@ -109,17 +117,7 @@ const ThemeChangeView = () => {
 
 export default ThemeChangeView;
 
-type Styles = {
-  wrapper: ViewStyle;
-  title: TextStyle;
-  description: TextStyle;
-  tabContainer: ViewStyle;
-  tab: ViewStyle;
-  tabText: TextStyle;
-  indicator: ViewStyle;
-};
-
-const styles = StyleSheet.create<Styles>({
+const stylesheet = createStyleSheet((theme) => ({
   wrapper: {
     width: '100%',
     flex: 1,
@@ -163,7 +161,7 @@ const styles = StyleSheet.create<Styles>({
     top: CONTAINER_PADDING,
     height: '100%',
     width: CONTAINER_WIDTH / 3,
-    backgroundColor: Colors.background,
+    backgroundColor: theme.background.primary,
     borderRadius: 30,
   },
-});
+}));
