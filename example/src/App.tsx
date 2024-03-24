@@ -15,9 +15,7 @@ const APP_THEME = {
 };
 
 export default function App() {
-  React.useEffect(() => {
-    useTheme();
-  }, []);
+  useTheme();
 
   return (
     <NavigationContainer theme={APP_THEME}>
