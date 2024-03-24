@@ -2,9 +2,9 @@ import type {
   BottomTabNavigationOptions,
   BottomTabNavigationProp,
 } from '@react-navigation/bottom-tabs';
-import { Colors } from '../styles/colors';
 import HomeIcon from '../../assets/images/home_icon.svg';
 import SettingsIcon from '../../assets/images/settings_icon.svg';
+import { Colors } from '../styles/colors';
 
 export type HomeTabParamList = {
   HomeTab: undefined;

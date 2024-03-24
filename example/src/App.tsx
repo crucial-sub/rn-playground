@@ -1,8 +1,9 @@
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
 import 'react-native-gesture-handler';
-import MainScreen from './screens/MainScreen';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import BottomSheet from './components/BottomSheet';
+import './lib/styles/uniStyles';
+import MainScreen from './screens/MainScreen';
 
 const APP_THEME = {
   ...DefaultTheme,

@@ -22,8 +22,6 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useBottomSheetStore } from '../stores/bottomsheet';
 
-const DEFAULT_HEIGHT = 350;
-
 const BottomSheet = () => {
   const { isOpened, component, height, afterClose, closeBottomSheet } =
     useBottomSheetStore();
