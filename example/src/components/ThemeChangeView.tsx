@@ -15,7 +15,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { Colors } from '../lib/styles/colors';
-import { useThemeStore } from '../stores/theme';
+import { useThemeStore } from '../stores/style';
 
 const PADDING = 20;
 const SCREEN_WIDTH = Dimensions.get('window').width;
