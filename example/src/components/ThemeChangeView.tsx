@@ -85,7 +85,7 @@ const ThemeChangeView = () => {
 
     setTimeout(() => {
       onChangeTheme(_theme);
-    }, TAB_TRANSITION_DURATION + 5);
+    }, TAB_TRANSITION_DURATION + 15);
   };
 
   return (
