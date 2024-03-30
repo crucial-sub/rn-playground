@@ -3,7 +3,6 @@ import {
   type StackNavigationProp,
 } from '@react-navigation/stack';
 import React from 'react';
-import HomeScreen from '../screens/HomeScreen';
 import AnimationStackNavigator, {
   type AnimationStackParamList,
 } from './AnimationStackNavigator';
@@ -29,11 +28,7 @@ const MainStack = createStackNavigator<MainStackParamList>();
 
 const MainStackNavigator = () => {
   return (
-    <MainStack.Navigator
-      screenOptions={{ headerShown: false }}
-      initialRouteName="Home"
-    >
-      <MainStack.Screen name="Home" component={HomeScreen} />
+    <MainStack.Navigator screenOptions={{ headerShown: false }}>
       <MainStack.Screen
         name="ListViewStack"
         component={ListViewStackNavigator}

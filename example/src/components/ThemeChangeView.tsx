@@ -5,14 +5,10 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {
-  UnistylesRuntime,
-  createStyleSheet,
-  useStyles,
-} from 'react-native-unistyles';
+import { createStyleSheet, useStyles } from 'react-native-unistyles';
+import useThemeChangeAnimation from '../hooks/useThemeChangeAnimation';
 import { Colors } from '../lib/styles/colors';
-import { setStorage } from '../lib/utils/storage';
-import { useThemeStore } from '../stores/style';
+import { useThemeChangeAnimationStore, useThemeStore } from '../stores/style';
 import Text from './Text';
 import View from './View';
 
@@ -21,6 +17,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 const CONTAINER_WIDTH = SCREEN_WIDTH - PADDING * 2;
 const CONTAINER_PADDING = 7;
 const TAB_WIDTH = CONTAINER_WIDTH / 3;
+const TAB_TRANSITION_DURATION = 200;
 
 type ThemeType = 'system' | 'light' | 'dark';
 
@@ -28,6 +25,10 @@ const ThemeChangeView = () => {
   const colorScheme = useColorScheme();
   const { styles } = useStyles(stylesheet);
   const left = useSharedValue(CONTAINER_PADDING);
+  const { isAnimating } = useThemeChangeAnimationStore();
+  const { onChangeTheme } = useThemeChangeAnimation();
+
+  const isRendered = React.useRef(false);
 
   const indicatorAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -35,20 +36,29 @@ const ThemeChangeView = () => {
     };
   });
 
-  const { selectedSwitch, setTheme, setSelectedSwitch } = useThemeStore();
+  const { selectedSwitch, theme, setTheme, setSelectedSwitch } =
+    useThemeStore();
 
   React.useEffect(() => {
     switch (selectedSwitch) {
       case 'system':
-        left.value = withTiming(CONTAINER_PADDING);
+        left.value = withTiming(CONTAINER_PADDING, {
+          duration: TAB_TRANSITION_DURATION,
+        });
         break;
       case 'light':
-        left.value = withTiming(TAB_WIDTH);
+        left.value = withTiming(TAB_WIDTH, {
+          duration: TAB_TRANSITION_DURATION,
+        });
         break;
       case 'dark':
-        left.value = withTiming(TAB_WIDTH * 2 - CONTAINER_PADDING);
+        left.value = withTiming(TAB_WIDTH * 2 - CONTAINER_PADDING, {
+          duration: TAB_TRANSITION_DURATION,
+        });
         break;
     }
+
+    isRendered.current = true;
   }, [selectedSwitch]);
 
   React.useEffect(() => {
@@ -67,14 +77,15 @@ const ThemeChangeView = () => {
   };
 
   const handlePressTheme = (_theme: ThemeType) => {
-    setSelectedSwitch(_theme);
-    setStorage('theme', _theme);
-
-    if (_theme === 'system') {
-      UnistylesRuntime.setTheme(colorScheme || 'light');
-    } else {
-      UnistylesRuntime.setTheme(_theme);
+    if (isAnimating || theme === _theme) {
+      return;
     }
+
+    setSelectedSwitch(_theme);
+
+    setTimeout(() => {
+      onChangeTheme(_theme);
+    }, TAB_TRANSITION_DURATION + 5);
   };
 
   return (

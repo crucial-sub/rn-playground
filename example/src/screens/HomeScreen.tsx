@@ -9,23 +9,17 @@ import ListViewThumbnail from '../assets/images/listview_thumbnail.png';
 import Text from '../components/Text';
 import View from '../components/View';
 import { Colors } from '../lib/styles/colors';
-import type { MainStackNavigationProp } from '../navigation/MainStackNavigator';
+import type { RootStackNavigationProp } from './MainScreen';
 
 const HomeScreen = () => {
-  const navigation = useNavigation<MainStackNavigationProp>();
+  const navigation = useNavigation<RootStackNavigationProp>();
 
   const onPressFlatListButton = () => {
-    navigation.navigate('ListViewStack', {
-      screen: 'ListViewScreen',
-      params: undefined,
-    });
+    navigation.navigate('MainStack', { screen: 'ListViewStack' });
   };
 
   const onPressAnimationPlaygroundButton = () => {
-    navigation.navigate('AnimationStack', {
-      screen: 'AnimationScreen',
-      params: undefined,
-    });
+    navigation.navigate('MainStack', { screen: 'AnimationStack' });
   };
 
   return (

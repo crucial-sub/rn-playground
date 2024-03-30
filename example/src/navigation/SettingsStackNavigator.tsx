@@ -3,7 +3,7 @@ import {
   type StackNavigationProp,
 } from '@react-navigation/stack';
 import React from 'react';
-import SettingsScreen from '../screens/SettingsScreen';
+import SettingsScreen from '../screens/settings/SettingsScreen';
 
 export type SettingsStackParamList = {
   SettingsScreen: undefined;
@@ -16,7 +16,7 @@ const SettingsStack = createStackNavigator<SettingsStackParamList>();
 
 const SettingsStackNavigator = () => {
   return (
-    <SettingsStack.Navigator>
+    <SettingsStack.Navigator screenOptions={{ headerShown: false }}>
       <SettingsStack.Screen name="SettingsScreen" component={SettingsScreen} />
     </SettingsStack.Navigator>
   );

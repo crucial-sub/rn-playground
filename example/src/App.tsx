@@ -1,16 +1,27 @@
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
+import { View } from 'react-native';
 import 'react-native-gesture-handler';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import BottomSheet from './components/BottomSheet';
+import ThemeChangeAnimationView from './components/ThemeChangeAnimationView';
 import useTheme from './hooks/useTheme';
 import './lib/styles/uniStyles';
+import { navigationRef } from './lib/utils/navigation-helper';
 import MainScreen from './screens/MainScreen';
+import { useThemeChangeAnimationStore } from './stores/style';
 
 export default function App() {
   useTheme();
 
   const { styles } = useStyles(stylesheet);
+  const { setState } = useThemeChangeAnimationStore();
+
+  const viewRef = React.useRef(null);
+
+  React.useEffect(() => {
+    setState({ ref: viewRef, isAnimating: false });
+  }, []);
 
   const theme = React.useMemo(() => {
     return {
@@ -27,10 +38,16 @@ export default function App() {
   }, [styles]);
 
   return (
-    <NavigationContainer theme={theme}>
-      <MainScreen />
-      <BottomSheet />
-    </NavigationContainer>
+    <>
+      <View ref={viewRef} style={{ flex: 1 }}>
+        <NavigationContainer ref={navigationRef} theme={theme}>
+          <MainScreen />
+          <BottomSheet />
+        </NavigationContainer>
+      </View>
+
+      <ThemeChangeAnimationView />
+    </>
   );
 }
 
