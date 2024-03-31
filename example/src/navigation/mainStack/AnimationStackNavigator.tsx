@@ -3,9 +3,9 @@ import {
   type StackNavigationProp,
 } from '@react-navigation/stack';
 import React from 'react';
-import AnimationScreen from '../screens/animations';
-import LayoutAnimationScreen from '../screens/animations/LayoutAnimationScreen';
-import GestureHandlerScreen from '../screens/GestureHandlerScreen';
+import AnimationScreen from '../../screens/animations';
+import LayoutAnimationScreen from '../../screens/animations/LayoutAnimationScreen';
+import GestureHandlerScreen from '../../screens/gestureHandlers/GestureHandlerScreen';
 
 export type AnimationStackParamList = {
   AnimationScreen: undefined;
@@ -40,4 +40,4 @@ const AnimationStackNavigator = () => {
   );
 };
 
-export default AnimationStackNavigator;
+export default React.memo(AnimationStackNavigator);

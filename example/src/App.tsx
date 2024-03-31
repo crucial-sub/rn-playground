@@ -8,7 +8,7 @@ import ThemeChangeAnimationView from './components/ThemeChangeAnimationView';
 import useTheme from './hooks/useTheme';
 import './lib/styles/uniStyles';
 import { navigationRef } from './lib/utils/navigation-helper';
-import MainScreen from './screens/MainScreen';
+import RootStackNavigator from './navigation/RootStackNavigator';
 import { useThemeChangeAnimationStore } from './stores/style';
 
 export default function App() {
@@ -41,7 +41,7 @@ export default function App() {
     <>
       <View ref={viewRef} style={{ flex: 1 }}>
         <NavigationContainer ref={navigationRef} theme={theme}>
-          <MainScreen />
+          <RootStackNavigator />
           <BottomSheet />
         </NavigationContainer>
       </View>

@@ -4,17 +4,13 @@ import { ScrollView, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ScreenWrapper from '../../components/ScreenWrapper';
 import Text from '../../components/Text';
-import type { AnimationStackNavigationProp } from '../../navigation/AnimationStackNavigator';
+import type { AnimationStackNavigationProp } from '../../navigation/mainStack/AnimationStackNavigator';
 
 const AnimationPlaygroundScreen = () => {
   const navigation = useNavigation<AnimationStackNavigationProp>();
 
   const handlePressCustomTransitionScreen = () => {
     navigation.navigate('LayoutAnimationScreen');
-  };
-
-  const handlePressGestureHandlerScreen = () => {
-    navigation.navigate('GestureHandlerScreen');
   };
 
   return (
@@ -28,13 +24,6 @@ const AnimationPlaygroundScreen = () => {
           onPress={handlePressCustomTransitionScreen}
         >
           <Text>LayoutAnimationScreen</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.button, { backgroundColor: '#008DDA' }]}
-          onPress={handlePressGestureHandlerScreen}
-        >
-          <Text>GestureHandler</Text>
         </TouchableOpacity>
       </ScrollView>
     </ScreenWrapper>

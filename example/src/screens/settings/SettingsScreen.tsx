@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import BellIcon from '../../assets/images/bell_icon.svg';
 import ThemeIcon from '../../assets/images/sun_icon.svg';
 import Text from '../../components/Text';
-import type { RootStackNavigationProp } from '../MainScreen';
+import type { RootStackNavigationProp } from '../../navigation/RootStackNavigator';
 
 const SettingsScreen = () => {
   const navigation = useNavigation<RootStackNavigationProp>();

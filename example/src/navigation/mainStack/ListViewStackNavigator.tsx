@@ -3,9 +3,9 @@ import {
   type StackNavigationProp,
 } from '@react-navigation/stack';
 import React from 'react';
-import ListViewScreen from '../screens/listViews';
-import FlatListScreen from '../screens/listViews/FlatListScreen';
-import SectionListScreen from '../screens/listViews/SectionListScreen';
+import ListViewScreen from '../../screens/listViews';
+import FlatListScreen from '../../screens/listViews/FlatListScreen';
+import SectionListScreen from '../../screens/listViews/SectionListScreen';
 
 export type ListViewStackParamList = {
   ListViewScreen: undefined;
@@ -34,4 +34,4 @@ const ListViewStackNavigator = () => {
   );
 };
 
-export default ListViewStackNavigator;
+export default React.memo(ListViewStackNavigator);

@@ -3,11 +3,10 @@ import {
   type StackNavigationProp,
 } from '@react-navigation/stack';
 import React from 'react';
-import BottomTabNavigator from '../navigation/BottomTabNavigator';
-import MainStackNavigator, {
-  type MainStackParamList,
-} from '../navigation/MainStackNavigator';
-import ThemeChangeScreen from './settings/ThemeChangeScreen';
+import ThemeChangeScreen from '../screens/settings/ThemeChangeScreen';
+import BottomTabNavigator from './bottomTab/BottomTabNavigator';
+import type { MainStackParamList } from './mainStack/MainStackNavigator';
+import MainStackNavigator from './mainStack/MainStackNavigator';
 
 export type RootStackParamList = {
   BottomTabStack: undefined;
@@ -22,7 +21,7 @@ export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
-const MainScreen = () => {
+const RootStackNavigator = () => {
   return (
     <RootStack.Navigator
       screenOptions={{ headerShown: false }}
@@ -41,4 +40,4 @@ const MainScreen = () => {
   );
 };
 
-export default MainScreen;
+export default React.memo(RootStackNavigator);

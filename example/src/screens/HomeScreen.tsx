@@ -9,7 +9,7 @@ import ListViewThumbnail from '../assets/images/listview_thumbnail.png';
 import Text from '../components/Text';
 import View from '../components/View';
 import { Colors } from '../lib/styles/colors';
-import type { RootStackNavigationProp } from './MainScreen';
+import type { RootStackNavigationProp } from '../navigation/RootStackNavigator';
 
 const HomeScreen = () => {
   const navigation = useNavigation<RootStackNavigationProp>();

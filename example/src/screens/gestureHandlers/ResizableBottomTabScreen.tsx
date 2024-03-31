@@ -5,14 +5,14 @@ import {
   type TextStyle,
   type ViewStyle,
 } from 'react-native';
-import PokeBall from '../assets/images/pokeball.svg';
-import ScreenWrapper from '../components/ScreenWrapper';
-import Text from '../components/Text';
-import View from '../components/View';
-import { Colors } from '../lib/styles/colors';
-import { useBottomSheetStore } from '../stores/bottomsheet';
+import PokeBall from '../../assets/images/pokeball.svg';
+import ScreenWrapper from '../../components/ScreenWrapper';
+import Text from '../../components/Text';
+import View from '../../components/View';
+import { Colors } from '../../lib/styles/colors';
+import { useBottomSheetStore } from '../../stores/bottomsheet';
 
-const GestureHandlerScreen = () => {
+const ResizableBottomTabScreen = () => {
   const { showBottomSheet } = useBottomSheetStore();
 
   const onOpen = () => {
@@ -68,4 +68,4 @@ const styles = StyleSheet.create<Style>({
   },
 });
 
-export default memo(GestureHandlerScreen);
+export default memo(ResizableBottomTabScreen);

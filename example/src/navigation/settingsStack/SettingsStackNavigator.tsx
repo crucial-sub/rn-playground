@@ -3,7 +3,7 @@ import {
   type StackNavigationProp,
 } from '@react-navigation/stack';
 import React from 'react';
-import SettingsScreen from '../screens/settings/SettingsScreen';
+import SettingsScreen from '../../screens/settings/SettingsScreen';
 
 export type SettingsStackParamList = {
   SettingsScreen: undefined;
@@ -22,4 +22,4 @@ const SettingsStackNavigator = () => {
   );
 };
 
-export default SettingsStackNavigator;
+export default React.memo(SettingsStackNavigator);

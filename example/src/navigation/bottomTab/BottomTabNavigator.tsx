@@ -6,10 +6,10 @@ import React from 'react';
 import {
   getBottomTabOptions,
   type HomeTabParamList,
-} from '../lib/utils/bottom-tab-helper';
-import HomeScreen from '../screens/HomeScreen';
-import type { SettingsStackParamList } from './SettingsStackNavigator';
-import SettingsStackNavigator from './SettingsStackNavigator';
+} from '../../lib/utils/bottom-tab-helper';
+import HomeScreen from '../../screens/HomeScreen';
+import type { SettingsStackParamList } from '../settingsStack/SettingsStackNavigator';
+import SettingsStackNavigator from '../settingsStack/SettingsStackNavigator';
 
 const BottomTab = createBottomTabNavigator<HomeTabParamList>();
 
@@ -46,4 +46,4 @@ const BottomTabNavigator = () => {
   );
 };
 
-export default BottomTabNavigator;
+export default React.memo(BottomTabNavigator);

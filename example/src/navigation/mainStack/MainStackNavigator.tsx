@@ -41,4 +41,4 @@ const MainStackNavigator = () => {
   );
 };
 
-export default MainStackNavigator;
+export default React.memo(MainStackNavigator);
