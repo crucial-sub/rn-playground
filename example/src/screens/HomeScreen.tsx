@@ -80,7 +80,7 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default React.memo(HomeScreen);
 
 const styles = StyleSheet.create({
   wrapper: {

@@ -1,49 +1,87 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { memo } from 'react';
 import {
+  ScrollView,
   StyleSheet,
   TouchableOpacity,
   type TextStyle,
   type ViewStyle,
 } from 'react-native';
-import PokeBall from '../../assets/images/pokeball.svg';
 import ScreenWrapper from '../../components/ScreenWrapper';
 import Text from '../../components/Text';
-import View from '../../components/View';
 import { Colors } from '../../lib/styles/colors';
-import { useBottomSheetStore } from '../../stores/bottomsheet';
+import type {
+  GestureHandlerStackNavigationProp,
+  GestureHandlerStackParamList,
+} from '../../navigation/mainStack/GestureHandlerStackNavigator';
 
 const GestureHandlerScreen = () => {
-  const { showBottomSheet } = useBottomSheetStore();
+  const navigation = useNavigation<GestureHandlerStackNavigationProp>();
 
-  const onOpen = () => {
-    showBottomSheet(<PokeBall width={64} height={64} style={styles.image} />);
+  const onPressList = (screen: keyof GestureHandlerStackParamList) => {
+    switch (screen) {
+      case 'ResizableBottomTabScreen':
+        navigation.navigate('ResizableBottomTabScreen');
+        break;
+      case 'ListSwipeScreen':
+        navigation.navigate('ListSwipeScreen');
+        break;
+      case 'CarouselScreen':
+        navigation.navigate('CarouselScreen');
+        break;
+      default:
+        break;
+    }
   };
 
   return (
     <ScreenWrapper>
-      <View style={styles.container}>
-        <Text style={styles.title}>Gesture Handler Screen</Text>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+      >
+        <Text style={styles.title}>Gesture Handler Playground</Text>
 
-        <TouchableOpacity style={styles.button} onPress={onOpen}>
-          <Text style={styles.buttonText}>Open BottomSheet</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => onPressList('ResizableBottomTabScreen')}
+        >
+          <Text style={styles.buttonText}>ResizableBottomSheet</Text>
         </TouchableOpacity>
-      </View>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => onPressList('ListSwipeScreen')}
+        >
+          <Text style={styles.buttonText}>ListSwipe</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => onPressList('CarouselScreen')}
+        >
+          <Text style={styles.buttonText}>Carousel</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </ScreenWrapper>
   );
 };
 
 type Style = {
   container: ViewStyle;
+  contentContainer: ViewStyle;
   button: ViewStyle;
   buttonText: TextStyle;
   title: TextStyle;
-  image: ViewStyle;
 };
 
 const styles = StyleSheet.create<Style>({
   container: {
     flex: 1,
     paddingHorizontal: 20,
+  },
+  contentContainer: {
+    gap: 15,
   },
   title: {
     fontSize: 24,
@@ -55,16 +93,12 @@ const styles = StyleSheet.create<Style>({
     justifyContent: 'center',
     padding: 16,
     borderRadius: 12,
-    backgroundColor: Colors.primary,
+    backgroundColor: Colors.accent,
   },
   buttonText: {
     fontSize: 16,
     fontWeight: '600',
     color: Colors.background,
-  },
-  image: {
-    width: 64,
-    height: 64,
   },
 });
 
