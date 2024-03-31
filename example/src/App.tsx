@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import 'react-native-gesture-handler';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import BottomSheet from './components/BottomSheet';
-import ThemeChangeAnimationView from './components/ThemeChangeAnimationView';
+import ThemeChangeSnapshot from './components/ThemeChangeSnapshot';
 import useTheme from './hooks/useTheme';
 import './lib/styles/uniStyles';
 import { navigationRef } from './lib/utils/navigation-helper';
@@ -46,7 +46,7 @@ export default function App() {
         </NavigationContainer>
       </View>
 
-      <ThemeChangeAnimationView />
+      <ThemeChangeSnapshot />
     </>
   );
 }

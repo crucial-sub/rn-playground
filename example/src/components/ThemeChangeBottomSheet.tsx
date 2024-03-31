@@ -21,7 +21,7 @@ const TAB_TRANSITION_DURATION = 200;
 
 type ThemeType = 'system' | 'light' | 'dark';
 
-const ThemeChangeView = () => {
+const ThemeChangeBottomSheet = () => {
   const colorScheme = useColorScheme();
   const { styles } = useStyles(stylesheet);
   const left = useSharedValue(CONTAINER_PADDING);
@@ -122,7 +122,7 @@ const ThemeChangeView = () => {
   );
 };
 
-export default ThemeChangeView;
+export default ThemeChangeBottomSheet;
 
 const stylesheet = createStyleSheet((theme) => ({
   wrapper: {

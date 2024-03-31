@@ -9,7 +9,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
-import ThemeChangeView from '../../components/ThemeChangeView';
+import ThemeChangeBottomSheet from '../../components/ThemeChangeBottomSheet';
 import { navigationRef } from '../../lib/utils/navigation-helper';
 
 const HEIGHT = 450;
@@ -61,7 +61,7 @@ const ThemeChangeScreen = () => {
 
       <Animated.View style={[styles.container, containerAnimatedStyle]}>
         <View style={styles.contentContainer}>
-          <ThemeChangeView />
+          <ThemeChangeBottomSheet />
         </View>
       </Animated.View>
     </View>

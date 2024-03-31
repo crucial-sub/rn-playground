@@ -29,7 +29,7 @@ const _r = Math.max(
   ...SCREEN_CORNERS.map((corner) => dist(corner, { x: 0, y: 0 }))
 );
 
-const ThemeChangeAnimationView = () => {
+const ThemeChangeSnapshot = () => {
   const { snapshot1, snapshot2 } = useThemeChangeAnimationStore();
   const { clearAnimation } = useThemeChangeAnimation();
 
@@ -78,4 +78,4 @@ const ThemeChangeAnimationView = () => {
   );
 };
 
-export default ThemeChangeAnimationView;
+export default ThemeChangeSnapshot;
