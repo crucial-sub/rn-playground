@@ -9,13 +9,13 @@ import useTheme from './hooks/useTheme';
 import './lib/styles/uniStyles';
 import { navigationRef } from './lib/utils/navigation-helper';
 import RootStackNavigator from './navigation/RootStackNavigator';
-import { useThemeChangeAnimationStore } from './stores/style';
+import { useThemeAnimationStore } from './stores/theme';
 
 export default function App() {
   useTheme();
 
   const { styles } = useStyles(stylesheet);
-  const { setState } = useThemeChangeAnimationStore();
+  const { setState } = useThemeAnimationStore();
 
   const viewRef = React.useRef(null);
 
@@ -39,7 +39,7 @@ export default function App() {
 
   return (
     <>
-      <View ref={viewRef} style={{ flex: 1 }}>
+      <View ref={viewRef} style={styles.wrapper}>
         <NavigationContainer ref={navigationRef} theme={theme}>
           <RootStackNavigator />
           <BottomSheet />
@@ -52,6 +52,9 @@ export default function App() {
 }
 
 const stylesheet = createStyleSheet((theme) => ({
+  wrapper: {
+    flex: 1,
+  },
   themeColors: {
     backgroundColor: theme.background.primary,
     text: theme.text.primary,

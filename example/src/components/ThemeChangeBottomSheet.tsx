@@ -6,9 +6,9 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
-import useThemeChangeAnimation from '../hooks/useThemeChangeAnimation';
+import useThemeAnimation from '../hooks/useThemeAnimation';
 import { Colors } from '../lib/styles/colors';
-import { useThemeChangeAnimationStore, useThemeStore } from '../stores/style';
+import { useThemeAnimationStore, useThemeStore } from '../stores/theme';
 import Text from './Text';
 import View from './View';
 
@@ -25,8 +25,8 @@ const ThemeChangeBottomSheet = () => {
   const colorScheme = useColorScheme();
   const { styles } = useStyles(stylesheet);
   const left = useSharedValue(CONTAINER_PADDING);
-  const { isAnimating } = useThemeChangeAnimationStore();
-  const { onChangeTheme } = useThemeChangeAnimation();
+  const { isAnimating } = useThemeAnimationStore();
+  const { changeTheme } = useThemeAnimation();
 
   const isRendered = React.useRef(false);
 
@@ -84,7 +84,7 @@ const ThemeChangeBottomSheet = () => {
     setSelectedSwitch(_theme);
 
     setTimeout(() => {
-      onChangeTheme(_theme);
+      changeTheme(_theme);
     }, TAB_TRANSITION_DURATION + 15);
   };
 
@@ -121,8 +121,6 @@ const ThemeChangeBottomSheet = () => {
     </View>
   );
 };
-
-export default ThemeChangeBottomSheet;
 
 const stylesheet = createStyleSheet((theme) => ({
   wrapper: {
@@ -173,3 +171,5 @@ const stylesheet = createStyleSheet((theme) => ({
     borderRadius: 30,
   },
 }));
+
+export default React.memo(ThemeChangeBottomSheet);

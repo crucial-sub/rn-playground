@@ -4,15 +4,15 @@ import { useColorScheme } from 'react-native';
 import { UnistylesRuntime } from 'react-native-unistyles';
 import { sleep } from '../lib/utils/public';
 import { setStorage } from '../lib/utils/storage';
-import { useThemeChangeAnimationStore } from '../stores/style';
+import { useThemeAnimationStore } from '../stores/theme';
 
 type ThemeType = 'system' | 'light' | 'dark';
 
-const useThemeChangeAnimation = () => {
+const useThemeAnimation = () => {
   const colorScheme = useColorScheme();
-  const { ref, isAnimating, setState } = useThemeChangeAnimationStore();
+  const { ref, isAnimating, setState } = useThemeAnimationStore();
 
-  const changeTheme = React.useCallback((theme: ThemeType) => {
+  const setTheme = React.useCallback((theme: ThemeType) => {
     setStorage('theme', theme);
 
     if (theme === 'system') {
@@ -22,7 +22,7 @@ const useThemeChangeAnimation = () => {
     }
   }, []);
 
-  const onChangeTheme = React.useCallback(
+  const changeTheme = React.useCallback(
     async (theme: ThemeType) => {
       if (isAnimating || ref === undefined) {
         return;
@@ -38,7 +38,7 @@ const useThemeChangeAnimation = () => {
 
       await sleep(100);
 
-      changeTheme(theme);
+      setTheme(theme);
 
       await sleep(100);
 
@@ -62,9 +62,9 @@ const useThemeChangeAnimation = () => {
   }, []);
 
   return {
-    onChangeTheme,
+    changeTheme,
     clearAnimation,
   };
 };
 
-export default useThemeChangeAnimation;
+export default useThemeAnimation;

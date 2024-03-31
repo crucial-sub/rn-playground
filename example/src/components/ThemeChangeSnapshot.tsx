@@ -15,9 +15,9 @@ import {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import useThemeChangeAnimation from '../hooks/useThemeChangeAnimation';
+import useThemeAnimation from '../hooks/useThemeAnimation';
 import { windowHeight, windowWidth } from '../lib/utils/public';
-import { useThemeChangeAnimationStore } from '../stores/style';
+import { useThemeAnimationStore } from '../stores/theme';
 
 const SCREEN_CORNERS = [
   vec(0, 0),
@@ -25,15 +25,15 @@ const SCREEN_CORNERS = [
   vec(windowWidth, windowHeight),
   vec(0, windowHeight),
 ];
-const _r = Math.max(
+const radius = Math.max(
   ...SCREEN_CORNERS.map((corner) => dist(corner, { x: 0, y: 0 }))
 );
 
 const ThemeChangeSnapshot = () => {
-  const { snapshot1, snapshot2 } = useThemeChangeAnimationStore();
-  const { clearAnimation } = useThemeChangeAnimation();
+  const { snapshot1, snapshot2 } = useThemeAnimationStore();
+  const { clearAnimation } = useThemeAnimation();
 
-  const circleValue = useSharedValue({ x: 0, y: 0, r: _r });
+  const circleValue = useSharedValue({ x: 0, y: 0, r: radius });
   const transition = useSharedValue(0);
   const r = useDerivedValue(() => {
     return mix(transition.value, 0, circleValue.value.r);
