@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AnimationThumbnail from '../assets/images/animation_thumbnail.png';
 import Avatar from '../assets/images/avatar.png';
 import ChevronRight from '../assets/images/chevron_right.svg';
+import GestureHandlerThumbnail from '../assets/images/gesture_handler_thumbnail.png';
 import ListViewThumbnail from '../assets/images/listview_thumbnail.png';
 import Text from '../components/Text';
 import View from '../components/View';
@@ -20,6 +21,10 @@ const HomeScreen = () => {
 
   const onPressAnimationPlaygroundButton = () => {
     navigation.navigate('MainStack', { screen: 'AnimationStack' });
+  };
+
+  const onPressGestureHandlerButton = () => {
+    navigation.navigate('MainStack', { screen: 'GestureHandlerStack' });
   };
 
   return (
@@ -51,6 +56,21 @@ const HomeScreen = () => {
           <View style={styles.listTextContainer}>
             <Text style={styles.listTitle}>Animations Playground</Text>
             <Text style={styles.listDescription}>play with animations</Text>
+          </View>
+
+          <ChevronRight />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.listButton}
+          onPress={onPressGestureHandlerButton}
+        >
+          <Image style={styles.thumbnail} source={GestureHandlerThumbnail} />
+          <View style={styles.listTextContainer}>
+            <Text style={styles.listTitle}>GestureHandler Playground</Text>
+            <Text style={styles.listDescription}>
+              what can we do with gestures?
+            </Text>
           </View>
 
           <ChevronRight />

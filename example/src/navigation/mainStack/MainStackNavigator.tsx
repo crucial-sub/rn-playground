@@ -6,12 +6,13 @@ import React from 'react';
 import AnimationStackNavigator, {
   type AnimationStackParamList,
 } from './AnimationStackNavigator';
+import type { GestureHandlerStackParamList } from './GestureHandlerStackNavigator';
+import GestureHandlerStackNavigator from './GestureHandlerStackNavigator';
 import ListViewStackNavigator, {
   type ListViewStackParamList,
 } from './ListViewStackNavigator';
 
 export type MainStackParamList = {
-  Home: undefined;
   ListViewStack: {
     screen: keyof ListViewStackParamList;
     params: ListViewStackParamList[keyof ListViewStackParamList];
@@ -19,6 +20,10 @@ export type MainStackParamList = {
   AnimationStack: {
     screen: keyof AnimationStackParamList;
     params: AnimationStackParamList[keyof AnimationStackParamList];
+  };
+  GestureHandlerStack: {
+    screen: keyof GestureHandlerStackParamList;
+    params: GestureHandlerStackParamList[keyof GestureHandlerStackParamList];
   };
 };
 
@@ -36,6 +41,10 @@ const MainStackNavigator = () => {
       <MainStack.Screen
         name="AnimationStack"
         component={AnimationStackNavigator}
+      />
+      <MainStack.Screen
+        name="GestureHandlerStack"
+        component={GestureHandlerStackNavigator}
       />
     </MainStack.Navigator>
   );
