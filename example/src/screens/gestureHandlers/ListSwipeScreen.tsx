@@ -1,15 +1,10 @@
 import React from 'react';
-import {
-  Animated,
-  FlatList,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import { Animated, FlatList, TouchableOpacity } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
+import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import ScreenWrapper from '../../components/ScreenWrapper';
+import Text from '../../components/Text';
 import View from '../../components/View';
-import { Colors } from '../../lib/styles/colors';
 
 type AnimatedInterpolation = ReturnType<Animated.Value['interpolate']>;
 
@@ -20,7 +15,7 @@ interface ChatRoom {
   lastMessageAt: string;
 }
 
-const DUMMY_CHAT_ROOMS = [
+const DUMMY_CHAT_ROOMS: ChatRoom[] = [
   {
     id: 1,
     name: 'David',
@@ -54,28 +49,39 @@ const DUMMY_CHAT_ROOMS = [
 ];
 
 const ListSwipeScreen = () => {
+  const { styles } = useStyles(stylesheet);
   const [chatRooms, setChatRooms] =
     React.useState<ChatRoom[]>(DUMMY_CHAT_ROOMS);
+
+  const handlePressDelete = React.useCallback((id: number) => {
+    setChatRooms((prev) => prev.filter((room) => room.id !== id));
+  }, []);
+
   const renderRightActions = React.useCallback(
     (
-      progress: AnimatedInterpolation,
+      _: AnimatedInterpolation,
       dragX: AnimatedInterpolation,
       targetId: number
     ) => {
-      const handlePressDelete = () => {
-        setChatRooms((prev) => prev.filter((room) => room.id !== targetId));
-      };
+      const opacity = dragX.interpolate({
+        inputRange: [-100, 0],
+        outputRange: [1, 0],
+      });
 
       return (
-        <TouchableOpacity
-          style={styles.deleteButton}
-          onPress={handlePressDelete}
-        >
-          <Text style={styles.deleteText}>Delete</Text>
-        </TouchableOpacity>
+        <Animated.View style={[styles.deleteButton]}>
+          <TouchableOpacity
+            style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+            onPress={() => handlePressDelete(targetId)}
+          >
+            <Animated.Text style={[styles.deleteText, { opacity }]}>
+              Delete
+            </Animated.Text>
+          </TouchableOpacity>
+        </Animated.View>
       );
     },
-    []
+    [handlePressDelete]
   );
 
   const renderItem = React.useCallback(({ item }: { item: ChatRoom }) => {
@@ -110,9 +116,7 @@ const ListSwipeScreen = () => {
           data={chatRooms}
           contentContainerStyle={styles.flatList}
           renderItem={renderItem}
-          ListHeaderComponent={
-            <Text style={styles.title}>ListSwipeScreen</Text>
-          }
+          ListHeaderComponent={<Text style={styles.title}>ChatRooms</Text>}
           keyExtractor={keyExtractor}
         />
       </View>
@@ -122,16 +126,18 @@ const ListSwipeScreen = () => {
 
 export default React.memo(ListSwipeScreen);
 
-const styles = StyleSheet.create({
+const stylesheet = createStyleSheet((theme) => ({
   container: {},
   flatList: {
     width: '100%',
     height: '100%',
   },
   title: {
+    marginBottom: 20,
+    marginLeft: 20,
     fontSize: 24,
     fontWeight: '700',
-    marginBottom: 20,
+    color: theme.text.primary,
   },
   list: {
     flexDirection: 'row',
@@ -143,16 +149,17 @@ const styles = StyleSheet.create({
   listContent: {
     flex: 1,
     justifyContent: 'space-between',
+    color: theme.text.primary,
   },
   avatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: Colors.gray,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: theme.text.secondary,
   },
   lastMessageAt: {
     fontSize: 12,
-    color: Colors.gray,
+    color: theme.text.secondary,
   },
   deleteButton: {
     width: 100,
@@ -164,4 +171,4 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#fff',
   },
-});
+}));
