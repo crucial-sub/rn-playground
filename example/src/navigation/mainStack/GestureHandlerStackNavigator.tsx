@@ -6,11 +6,11 @@ import React from 'react';
 import CarouselScreen from '../../screens/gestureHandlers/CarouselScreen';
 import GestureHandlerScreen from '../../screens/gestureHandlers/GestureHandlerScreen';
 import ListSwipeScreen from '../../screens/gestureHandlers/ListSwipeScreen';
-import ResizableBottomTabScreen from '../../screens/gestureHandlers/ResizableBottomTabScreen';
+import ResizableBottomSheet from '../../screens/gestureHandlers/ResizableBottomSheetScreen';
 
 export type GestureHandlerStackParamList = {
   GestureHandlerScreen: undefined;
-  ResizableBottomTabScreen: undefined;
+  ResizableBottomSheet: undefined;
   ListSwipeScreen: undefined;
   CarouselScreen: undefined;
 };
@@ -32,8 +32,8 @@ const GestureHandlerStackNavigator = () => {
         component={GestureHandlerScreen}
       />
       <GestureHandlerStack.Screen
-        name="ResizableBottomTabScreen"
-        component={ResizableBottomTabScreen}
+        name="ResizableBottomSheet"
+        component={ResizableBottomSheet}
       />
 
       <GestureHandlerStack.Screen

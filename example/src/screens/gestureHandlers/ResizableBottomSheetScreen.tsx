@@ -12,7 +12,7 @@ import View from '../../components/View';
 import { Colors } from '../../lib/styles/colors';
 import { useBottomSheetStore } from '../../stores/bottomsheet';
 
-const ResizableBottomTabScreen = () => {
+const ResizableBottomSheetScreen = () => {
   const { showBottomSheet } = useBottomSheetStore();
 
   const onOpen = () => {
@@ -68,4 +68,4 @@ const styles = StyleSheet.create<Style>({
   },
 });
 
-export default memo(ResizableBottomTabScreen);
+export default memo(ResizableBottomSheetScreen);

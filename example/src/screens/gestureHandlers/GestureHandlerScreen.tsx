@@ -20,8 +20,8 @@ const GestureHandlerScreen = () => {
 
   const onPressList = (screen: keyof GestureHandlerStackParamList) => {
     switch (screen) {
-      case 'ResizableBottomTabScreen':
-        navigation.navigate('ResizableBottomTabScreen');
+      case 'ResizableBottomSheet':
+        navigation.navigate('ResizableBottomSheet');
         break;
       case 'ListSwipeScreen':
         navigation.navigate('ListSwipeScreen');
@@ -44,7 +44,7 @@ const GestureHandlerScreen = () => {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => onPressList('ResizableBottomTabScreen')}
+          onPress={() => onPressList('ResizableBottomSheet')}
         >
           <Text style={styles.buttonText}>ResizableBottomSheet</Text>
         </TouchableOpacity>
