@@ -6,11 +6,11 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
-import useThemeAnimation from '../hooks/useThemeAnimation';
-import { Colors } from '../lib/styles/colors';
-import { useThemeAnimationStore, useThemeStore } from '../stores/theme';
-import Text from './Text';
-import View from './View';
+import useThemeAnimation from '../../hooks/useThemeAnimation';
+import { Colors } from '../../lib/styles/colors';
+import { useThemeAnimationStore, useThemeStore } from '../../stores/theme';
+import Text from '../Text';
+import View from '../View';
 
 const PADDING = 20;
 const SCREEN_WIDTH = Dimensions.get('window').width;

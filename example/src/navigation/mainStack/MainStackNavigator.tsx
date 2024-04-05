@@ -3,6 +3,7 @@ import {
   type StackNavigationProp,
 } from '@react-navigation/stack';
 import React from 'react';
+import NotificationScreen from '../../screens/settings/NotificationScreen';
 import AnimationStackNavigator, {
   type AnimationStackParamList,
 } from './AnimationStackNavigator';
@@ -25,6 +26,7 @@ export type MainStackParamList = {
     screen: keyof GestureHandlerStackParamList;
     params: GestureHandlerStackParamList[keyof GestureHandlerStackParamList];
   };
+  NotificationScreen: undefined;
 };
 
 export type MainStackNavigationProp = StackNavigationProp<MainStackParamList>;
@@ -45,6 +47,10 @@ const MainStackNavigator = () => {
       <MainStack.Screen
         name="GestureHandlerStack"
         component={GestureHandlerStackNavigator}
+      />
+      <MainStack.Screen
+        name="NotificationScreen"
+        component={NotificationScreen}
       />
     </MainStack.Navigator>
   );

@@ -15,7 +15,7 @@ const SettingsScreen = () => {
   };
 
   const handlePressNotification = () => {
-    console.log('Notification');
+    navigation.navigate('MainStack', { screen: 'NotificationScreen' });
   };
 
   return (

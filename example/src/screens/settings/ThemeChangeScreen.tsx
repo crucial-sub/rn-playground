@@ -9,7 +9,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
-import ThemeChangeBottomSheet from '../../components/ThemeChangeBottomSheet';
+import ThemeChangeBottomSheet from '../../components/theme/ThemeChangeBottomSheet';
 import { navigationRef } from '../../lib/utils/navigation-helper';
 
 const HEIGHT = 450;
@@ -24,6 +24,7 @@ const ThemeChangeScreen = () => {
 
   const containerAnimatedStyle = useAnimatedStyle(() => {
     return {
+      ...styles.container,
       height: bottomSheetHeight.value,
       transform: [{ translateY: translateY.value }],
     };
@@ -59,7 +60,7 @@ const ThemeChangeScreen = () => {
         />
       </TouchableWithoutFeedback>
 
-      <Animated.View style={[styles.container, containerAnimatedStyle]}>
+      <Animated.View style={containerAnimatedStyle}>
         <View style={styles.contentContainer}>
           <ThemeChangeBottomSheet />
         </View>

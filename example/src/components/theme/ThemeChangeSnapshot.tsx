@@ -15,9 +15,9 @@ import {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import useThemeAnimation from '../hooks/useThemeAnimation';
-import { windowHeight, windowWidth } from '../lib/utils/public';
-import { useThemeAnimationStore } from '../stores/theme';
+import useThemeAnimation from '../../hooks/useThemeAnimation';
+import { windowHeight, windowWidth } from '../../lib/utils/public';
+import { useThemeAnimationStore } from '../../stores/theme';
 
 const SCREEN_CORNERS = [
   vec(0, 0),
