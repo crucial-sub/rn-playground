@@ -79,7 +79,9 @@ const ThemeChangeBottomSheet = () => {
   };
 
   const handlePressTheme = (_theme: ThemeType) => {
-    if (isAnimating || theme === _theme) {
+    const shouldChangeTheme = selectedSwitch !== _theme;
+
+    if (isAnimating || !shouldChangeTheme) {
       return;
     }
 

@@ -22,9 +22,9 @@ const ThemeChangeScreen = () => {
   const translateY = useSharedValue(HEIGHT);
   const bottomSheetHeight = useSharedValue(HEIGHT);
 
-  const containerAnimatedStyle = useAnimatedStyle(() => {
+  const bottomSheetStyle = useAnimatedStyle(() => {
     return {
-      ...styles.container,
+      ...styles.bottomSheet,
       height: bottomSheetHeight.value,
       transform: [{ translateY: translateY.value }],
     };
@@ -60,8 +60,8 @@ const ThemeChangeScreen = () => {
         />
       </TouchableWithoutFeedback>
 
-      <Animated.View style={containerAnimatedStyle}>
-        <View style={styles.contentContainer}>
+      <Animated.View style={bottomSheetStyle}>
+        <View style={styles.container}>
           <ThemeChangeBottomSheet />
         </View>
       </Animated.View>
@@ -79,7 +79,7 @@ const stylesheet = createStyleSheet((theme) => ({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0, 0, 0, 0.35)',
   },
-  container: {
+  bottomSheet: {
     ...StyleSheet.absoluteFillObject,
     top: 'auto',
     bottom: 0,
@@ -87,7 +87,7 @@ const stylesheet = createStyleSheet((theme) => ({
     borderTopRightRadius: 16,
     overflow: 'hidden',
   },
-  contentContainer: {
+  container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
