@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, TouchableOpacity, useColorScheme } from 'react-native';
+import { TouchableOpacity, useColorScheme } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -8,16 +8,22 @@ import Animated, {
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import useThemeAnimation from '../../hooks/useThemeAnimation';
 import { Colors } from '../../lib/styles/colors';
+import { windowWidth } from '../../lib/utils/public';
 import { useThemeAnimationStore, useThemeStore } from '../../stores/theme';
 import Text from '../Text';
 import View from '../View';
 
 const PADDING = 20;
-const SCREEN_WIDTH = Dimensions.get('window').width;
-const CONTAINER_WIDTH = SCREEN_WIDTH - PADDING * 2;
+const CONTAINER_WIDTH = windowWidth - PADDING * 2;
 const CONTAINER_PADDING = 7;
 const TAB_WIDTH = CONTAINER_WIDTH / 3;
 const TAB_TRANSITION_DURATION = 200;
+
+const TABS = [
+  { key: 'system', title: 'System' },
+  { key: 'light', title: 'Light' },
+  { key: 'dark', title: 'Dark' },
+] as const;
 
 type ThemeType = 'system' | 'light' | 'dark';
 
@@ -27,8 +33,6 @@ const ThemeChangeBottomSheet = () => {
   const left = useSharedValue(CONTAINER_PADDING);
   const { isAnimating } = useThemeAnimationStore();
   const { changeTheme } = useThemeAnimation();
-
-  const isRendered = React.useRef(false);
 
   const indicatorAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -57,8 +61,6 @@ const ThemeChangeBottomSheet = () => {
         });
         break;
     }
-
-    isRendered.current = true;
   }, [selectedSwitch]);
 
   React.useEffect(() => {
@@ -97,24 +99,15 @@ const ThemeChangeBottomSheet = () => {
       </Text>
 
       <View style={styles.tabContainer}>
-        <TouchableOpacity
-          style={styles.tab}
-          onPress={() => handlePressTheme('system')}
-        >
-          <Text style={tabTextStyle('system')}>System</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.tab}
-          onPress={() => handlePressTheme('light')}
-        >
-          <Text style={tabTextStyle('light')}>Light</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.tab}
-          onPress={() => handlePressTheme('dark')}
-        >
-          <Text style={tabTextStyle('dark')}>Dark</Text>
-        </TouchableOpacity>
+        {TABS.map((tab) => (
+          <TouchableOpacity
+            key={tab.key}
+            style={styles.tab}
+            onPress={() => handlePressTheme(tab.key)}
+          >
+            <Text style={tabTextStyle(tab.key)}>{tab.title}</Text>
+          </TouchableOpacity>
+        ))}
 
         <Animated.View style={[styles.indicator, indicatorAnimatedStyle]} />
       </View>
