@@ -32,7 +32,7 @@ const ThemeChangeBottomSheet = () => {
   const { styles } = useStyles(stylesheet);
   const left = useSharedValue(CONTAINER_PADDING);
   const { isAnimating } = useThemeAnimationStore();
-  const { changeTheme } = useThemeAnimation();
+  const { playChangeThemeAnimation } = useThemeAnimation();
 
   const indicatorAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -40,8 +40,7 @@ const ThemeChangeBottomSheet = () => {
     };
   });
 
-  const { selectedSwitch, theme, setTheme, setSelectedSwitch } =
-    useThemeStore();
+  const { selectedSwitch, setTheme, setSelectedSwitch } = useThemeStore();
 
   React.useEffect(() => {
     switch (selectedSwitch) {
@@ -88,7 +87,7 @@ const ThemeChangeBottomSheet = () => {
     setSelectedSwitch(_theme);
 
     setTimeout(() => {
-      changeTheme(_theme);
+      playChangeThemeAnimation(_theme);
     }, TAB_TRANSITION_DURATION + 15);
   };
 

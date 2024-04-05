@@ -12,7 +12,7 @@ const useThemeAnimation = () => {
   const colorScheme = useColorScheme();
   const { ref, isAnimating, setState } = useThemeAnimationStore();
 
-  const setTheme = React.useCallback((theme: ThemeType) => {
+  const changeTheme = React.useCallback((theme: ThemeType) => {
     setStorage('theme', theme);
 
     if (theme === 'system') {
@@ -22,7 +22,7 @@ const useThemeAnimation = () => {
     }
   }, []);
 
-  const changeTheme = React.useCallback(
+  const playChangeThemeAnimation = React.useCallback(
     async (theme: ThemeType) => {
       if (isAnimating || ref === undefined) {
         return;
@@ -38,7 +38,7 @@ const useThemeAnimation = () => {
 
       await sleep(100);
 
-      setTheme(theme);
+      changeTheme(theme);
 
       await sleep(100);
 
@@ -53,7 +53,7 @@ const useThemeAnimation = () => {
     [ref, isAnimating]
   );
 
-  const clearAnimation = React.useCallback(async () => {
+  const clearAnimationState = React.useCallback(async () => {
     setState({
       snapshot1: undefined,
       snapshot2: undefined,
@@ -62,8 +62,8 @@ const useThemeAnimation = () => {
   }, []);
 
   return {
-    changeTheme,
-    clearAnimation,
+    playChangeThemeAnimation,
+    clearAnimationState,
   };
 };
 

@@ -34,7 +34,7 @@ const radius = Math.max(
 
 const ThemeChangeSnapshot = () => {
   const { snapshot1, snapshot2 } = useThemeAnimationStore();
-  const { clearAnimation } = useThemeAnimation();
+  const { clearAnimationState } = useThemeAnimation();
 
   const circleValue = useSharedValue({ x: 0, y: 0, r: radius });
   const transition = useSharedValue(0);
@@ -46,7 +46,7 @@ const ThemeChangeSnapshot = () => {
   React.useEffect(() => {
     if (snapshot2) {
       transition.value = withTiming(1, { duration: 350 }, () => {
-        runOnJS(clearAnimation)();
+        runOnJS(clearAnimationState)();
       });
 
       setTimeout(() => {
