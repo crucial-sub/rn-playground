@@ -87,7 +87,10 @@ const ThemeChangeBottomSheet = () => {
     setSelectedSwitch(_theme);
 
     setTimeout(() => {
-      playChangeThemeAnimation(_theme);
+      // Theme이 변경될 필요가 없으면, 굳이 애니메이션을 실행할 필요 없다.
+      if (colorScheme !== _theme) {
+        playChangeThemeAnimation(_theme);
+      }
     }, TAB_TRANSITION_DURATION + 15);
   };
 
