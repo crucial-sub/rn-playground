@@ -16,7 +16,9 @@ const ResizableBottomSheetScreen = () => {
   const { showBottomSheet } = useBottomSheetStore();
 
   const onOpen = () => {
-    showBottomSheet(<PokeBall width={64} height={64} style={styles.image} />);
+    showBottomSheet({
+      component: <PokeBall width={64} height={64} style={styles.image} />,
+    });
   };
 
   return (
